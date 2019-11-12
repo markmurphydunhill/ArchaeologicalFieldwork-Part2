@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fieldwork</string>
+    <string name="button_addFieldwork">Add Fieldwork</string>
+    <string name="hint_fieldworkTitle">Fieldwork Title</string>
+    <string name="button_addfieldwork">Add Placemark</string>
+    <string name="hint_fieldworkDescription">Description </string>
+</resources>

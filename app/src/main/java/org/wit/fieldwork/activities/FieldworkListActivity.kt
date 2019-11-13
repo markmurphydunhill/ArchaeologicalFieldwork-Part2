@@ -7,14 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 //import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_fieldwork_list.*
+import org.jetbrains.anko.intentFor
 //import kotlinx.android.synthetic.main.card_fieldwork.view.*
 import org.jetbrains.anko.startActivityForResult
 import org.wit.fieldwork.R
 import org.wit.fieldwork.main.MainApp
+import org.wit.fieldwork.models.FieldworkModel
+
 //import org.wit.fieldwork.models.FieldworkModel
 
 
-class FieldworkListActivity : AppCompatActivity() {
+class FieldworkListActivity : AppCompatActivity(), FieldworkListener {
 
     lateinit var app: MainApp
 
@@ -28,7 +31,7 @@ class FieldworkListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = FieldworkAdapter(app.fieldworks)
+        recyclerView.adapter = FieldworkAdapter(app.fieldworks.findAll(),this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -41,6 +44,10 @@ class FieldworkListActivity : AppCompatActivity() {
             R.id.item_add -> startActivityForResult<FieldworkActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onFieldworkClick(fieldwork: FieldworkModel) {
+        startActivityForResult(intentFor<FieldworkActivity>().putExtra("fieldwork_edit", fieldwork), 0)
     }
 }
 

@@ -26,15 +26,21 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarAdd)
        info("Fieldwork Activity started..")
 
+        if (intent.hasExtra("fieldwork_edit")) {
+            fieldwork = intent.extras?.getParcelable<FieldworkModel>("fieldwork_edit")!!
+            fieldworkTitle.setText(fieldwork.title)
+            fieldworkDescription.setText(fieldwork.description)
+        }
+
         btnAdd.setOnClickListener() {
             fieldwork.title = fieldworkTitle.text.toString()
             fieldwork.description = fieldworkDescription.text.toString()
             if (fieldwork.title.isNotEmpty()) {
-                app.fieldworks.add(fieldwork.copy())
+                app.fieldworks.create(fieldwork.copy())
                 info("add Button Pressed: ${fieldwork}")
-                for (i in app.fieldworks.indices) {
+             /*   for (i in app.fieldworks.indices) {
                     info("Fieldwork[$i]:${app.fieldworks[i]}")
-                }
+                }*/
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }

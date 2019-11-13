@@ -12,6 +12,6 @@ class MainApp : Application(), AnkoLogger {
     override fun onCreate() {
         super.onCreate()
         info("Fieldwork started")
-        
+
     }
 }

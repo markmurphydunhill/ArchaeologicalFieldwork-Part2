@@ -1,5 +1,6 @@
 package org.wit.fieldwork.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -50,6 +51,11 @@ class FieldworkListActivity : AppCompatActivity(), FieldworkListener {
 
     override fun onFieldworkClick(fieldwork: FieldworkModel) {
         startActivityForResult(intentFor<FieldworkActivity>().putExtra("fieldwork_edit", fieldwork), 0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
 

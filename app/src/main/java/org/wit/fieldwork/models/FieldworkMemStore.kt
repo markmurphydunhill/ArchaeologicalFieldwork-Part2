@@ -24,14 +24,15 @@ class FieldworkMemStore : FieldworkStore, AnkoLogger {
         logAll()
     }
 
-    /*override fun update(fieldwork: FieldworkModel) {
+    override fun update(fieldwork: FieldworkModel) {
         var foundFieldwork: FieldworkModel? = fieldworks.find { p -> p.id == fieldwork.id }
         if (foundFieldwork != null) {
             foundFieldwork.title = fieldwork.title
             foundFieldwork.description = fieldwork.description
+            foundFieldwork.image = fieldwork.image
             logAll()
         }
-    }*/
+    }
 
     fun logAll(){
         fieldworks.forEach{info("${it}")}

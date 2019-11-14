@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.toast
 import org.wit.fieldwork.helpers.*
 import java.util.*
 
@@ -40,9 +41,22 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
     }
 
 
-   /* override fun update(fieldwork: FieldworkModel) {
-        // todo
-    }*/
+    override fun update(fieldwork: FieldworkModel) {
+
+        val fieldworksList = findAll() as ArrayList<FieldworkModel>
+       // toast (fieldworksList)
+        var foundFieldwork: FieldworkModel? = fieldworksList.find { p -> p.id == fieldwork.id }
+        if (foundFieldwork != null) {
+            foundFieldwork.title = fieldwork.title
+            foundFieldwork.description = fieldwork.description
+            foundFieldwork.image = fieldwork.image
+         //   foundFieldwork.lat = placemark.lat
+         //   foundFieldwork.lng = placemark.lng
+         //   foundFieldwork.zoom = placemark.zoom
+        }
+
+        serialize()
+    }
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(fieldworks, listType)

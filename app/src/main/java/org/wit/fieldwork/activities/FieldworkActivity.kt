@@ -2,6 +2,7 @@ package org.wit.fieldwork.activities
 
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -14,13 +15,15 @@ import org.wit.fieldwork.R
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.main.MainApp
 import mu.KotlinLogging
+import org.wit.fieldwork.helpers.readImage
+import org.wit.fieldwork.helpers.readImageFromPath
+import org.wit.fieldwork.helpers.showImagePicker
 import org.wit.fieldwork.models.FieldworkJSONStore
 
 class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
     var fieldwork = FieldworkModel()
-   // val fieldwork = FieldworkJSONStore
-    //val logger = KotlinLogging.logger {}
+    val IMAGE_REQUEST = 1
 
     lateinit var app: MainApp
 
@@ -33,28 +36,48 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarAdd)
        info("Fieldwork Activity started..")
 
+        var edit = false
+
+
         if (intent.hasExtra("fieldwork_edit")) {
+            edit = true
+
             fieldwork = intent.extras?.getParcelable<FieldworkModel>("fieldwork_edit")!!
             fieldworkTitle.setText(fieldwork.title)
             fieldworkDescription.setText(fieldwork.description)
+            fieldworkImage.setImageBitmap(readImageFromPath(this, fieldwork.image))
+            if (fieldworkImage != null) {
+                chooseImage.setText(R.string.update_image)
+            }
+            btnAdd.setText(R.string.save_fieldwork)
         }
 
         btnAdd.setOnClickListener() {
             fieldwork.title = fieldworkTitle.text.toString()
             fieldwork.description = fieldworkDescription.text.toString()
-            if (fieldwork.title.isNotEmpty()) {
-                app.fieldworks.create(fieldwork.copy())
-                info("add Button Pressed: ${fieldwork}")
-             /*   for (i in app.fieldworks.indices) {
-                    info("Fieldwork[$i]:${app.fieldworks[i]}")
-                }*/
-                setResult(AppCompatActivity.RESULT_OK)
-                finish()
+            // if (fieldwork.title.isNotEmpty()) {
+            //   app.fieldworks.create(fieldwork.copy())
+            // info("add Button Pressed: ${fieldwork}")
+            if (fieldwork.title.isEmpty()) {
+                  toast(R.string.enter_fieldwork_title)
+            } else {
+                if (edit) {
+                    app.fieldworks.update(fieldwork.copy())
+
+                } else {
+                    app.fieldworks.create(fieldwork.copy())
+                }
             }
-            else {
-                toast ("Please Enter a title")
+            // info("add Button Pressed: $fieldmarkTitle")
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()
             }
+
+        chooseImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
+
         }
+
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -69,6 +92,19 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            IMAGE_REQUEST -> {
+                if (data != null) {
+                    fieldwork.image = data.getData().toString()
+                    fieldworkImage.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage.setText(R.string.update_image)
+                }
+            }
+        }
     }
 
 }

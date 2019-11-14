@@ -1,5 +1,7 @@
 package org.wit.fieldwork.activities
 
+
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,10 +13,15 @@ import org.jetbrains.anko.toast
 import org.wit.fieldwork.R
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.main.MainApp
+import mu.KotlinLogging
+import org.wit.fieldwork.models.FieldworkJSONStore
 
 class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
     var fieldwork = FieldworkModel()
+   // val fieldwork = FieldworkJSONStore
+    //val logger = KotlinLogging.logger {}
+
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {

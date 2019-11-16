@@ -30,6 +30,9 @@ class FieldworkMemStore : FieldworkStore, AnkoLogger {
             foundFieldwork.title = fieldwork.title
             foundFieldwork.description = fieldwork.description
             foundFieldwork.image = fieldwork.image
+            foundFieldwork.lat = fieldwork.lat
+            foundFieldwork.lng = fieldwork.lng
+            foundFieldwork.zoom = fieldwork.zoom
             logAll()
         }
     }
@@ -38,4 +41,6 @@ class FieldworkMemStore : FieldworkStore, AnkoLogger {
         fieldworks.forEach{info("${it}")}
 
     }
+
+
 }

@@ -14,16 +14,18 @@ import org.jetbrains.anko.toast
 import org.wit.fieldwork.R
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.main.MainApp
-import mu.KotlinLogging
+import org.jetbrains.anko.intentFor
 import org.wit.fieldwork.helpers.readImage
 import org.wit.fieldwork.helpers.readImageFromPath
 import org.wit.fieldwork.helpers.showImagePicker
-import org.wit.fieldwork.models.FieldworkJSONStore
+import org.wit.fieldwork.models.Location
 
 class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
     var fieldwork = FieldworkModel()
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
+   // var location = Location(52.245696, -7.139102, 15f)
 
     lateinit var app: MainApp
 
@@ -52,7 +54,7 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             btnAdd.setText(R.string.save_fieldwork)
         }
 
-        btnAdd.setOnClickListener() {
+            btnAdd.setOnClickListener() {
             fieldwork.title = fieldworkTitle.text.toString()
             fieldwork.description = fieldworkDescription.text.toString()
             // if (fieldwork.title.isNotEmpty()) {
@@ -72,6 +74,21 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             setResult(AppCompatActivity.RESULT_OK)
             finish()
             }
+
+        placemarkLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (fieldwork.zoom != 0f) {
+                location.lat =  fieldwork.lat
+                location.lng = fieldwork.lng
+                location.zoom = fieldwork.zoom
+            }
+            startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
+
+        btnDel.setOnClickListener {
+            info ("Delete button Pressed")
+        }
+
 
         chooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
@@ -101,7 +118,15 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     fieldwork.image = data.getData().toString()
                     fieldworkImage.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage.setText(R.string.update_image)
+                    chooseImage.setText(R.string.change_fieldwork_image)
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    val location = data.extras?.getParcelable<Location>("location")!!
+                    fieldwork.lat = location.lat
+                    fieldwork.lng = location.lng
+                    fieldwork.zoom = location.zoom
                 }
             }
         }

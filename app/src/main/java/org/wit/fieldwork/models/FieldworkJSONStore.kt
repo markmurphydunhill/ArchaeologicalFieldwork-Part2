@@ -58,6 +58,8 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
         serialize()
     }
 
+
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(fieldworks, listType)
         write(context, JSON_FILE, jsonString)

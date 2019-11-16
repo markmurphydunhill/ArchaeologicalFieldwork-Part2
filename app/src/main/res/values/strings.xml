@@ -11,5 +11,9 @@
     <string name="button_addImage"> Add Image </string>
     <string name="select_fieldwork_image">Select fieldwork image</string>
     <string name="update_image">Update Image</string>
+    <string name="button_delFieldwork">Delete Fieldwork</string>
+    <string name="button_location">Set Location</string>
+    <string name="title_activity_map">Map</string>
+    <string name="change_fieldwork_image">Change fieldwork image</string>
 
 </resources>

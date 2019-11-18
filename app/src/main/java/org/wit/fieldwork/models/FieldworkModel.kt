@@ -16,3 +16,7 @@ data class FieldworkModel(  var id: Long = 0,
 data class Location(var lat: Double = 0.0,
                     var lng: Double = 0.0,
                     var zoom: Float = 0f) : Parcelable
+/*
+@Parcelize
+data class UserModel(var email: String = "",
+                var password: String = "") : Parcelable*/

@@ -34,8 +34,10 @@
             android:name=".activities.MapActivity"
             android:label="@string/title_activity_map"></activity>
         <activity android:name=".activities.FieldworkActivity" />
-        <activity android:name=".activities.FieldworkListActivity">
-            <intent-filter>
+        <activity android:name=".activities.FieldworkListActivity"/>
+        <activity android:name=".activities.LoginActivity">
+
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

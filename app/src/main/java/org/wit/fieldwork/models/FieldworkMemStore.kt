@@ -1,4 +1,4 @@
-package org.wit.fieldwork.models
+/*package org.wit.fieldwork.models
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -12,10 +12,15 @@ internal fun getId(): Long {
 class FieldworkMemStore : FieldworkStore, AnkoLogger {
 
     val fieldworks = ArrayList<FieldworkModel>()
+    val users = ArrayList<UserModel>()
 
     override fun findAll(): List<FieldworkModel> {
         return fieldworks
     }
+
+    /*override fun findAllUsers(): MutableList<UserModel>{
+        return users
+    }*/
 
 
     override fun create(fieldwork: FieldworkModel) {
@@ -43,4 +48,4 @@ class FieldworkMemStore : FieldworkStore, AnkoLogger {
     }
 
 
-}
+}*/

@@ -10,9 +10,9 @@ import org.jetbrains.anko.toast
 import org.wit.fieldwork.helpers.*
 import java.util.*
 
-val JSON_FILE = "fieldworks.json"
-val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
-val listType = object : TypeToken<java.util.ArrayList<FieldworkModel>>() {}.type
+private val JSON_FILE = "fieldworks.json"
+private val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
+private val listType = object : TypeToken<java.util.ArrayList<FieldworkModel>>() {}.type
 
 fun generateRandomId(): Long {
     return Random().nextLong()
@@ -22,6 +22,7 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
 
     val context: Context
     var fieldworks = mutableListOf<FieldworkModel>()
+
 
     constructor (context: Context) {
         this.context = context
@@ -34,11 +35,14 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
         return fieldworks
     }
 
+
+
     override fun create(fieldwork: FieldworkModel) {
         fieldwork.id = generateRandomId()
         fieldworks.add(fieldwork)
         serialize()
     }
+
 
 
     override fun update(fieldwork: FieldworkModel) {
@@ -50,9 +54,9 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
             foundFieldwork.title = fieldwork.title
             foundFieldwork.description = fieldwork.description
             foundFieldwork.image = fieldwork.image
-         //   foundFieldwork.lat = placemark.lat
-         //   foundFieldwork.lng = placemark.lng
-         //   foundFieldwork.zoom = placemark.zoom
+            foundFieldwork.lat = fieldwork.lat
+            foundFieldwork.lng = fieldwork.lng
+            foundFieldwork.zoom = fieldwork.zoom
         }
 
         serialize()

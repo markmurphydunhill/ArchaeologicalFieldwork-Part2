@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.wit.fieldwork">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -32,12 +31,12 @@
 
         <activity
             android:name=".activities.MapActivity"
-            android:label="@string/title_activity_map"></activity>
+            android:label="@string/title_activity_map" />
         <activity android:name=".activities.FieldworkActivity" />
-        <activity android:name=".activities.FieldworkListActivity"/>
-        <activity android:name=".activities.LoginActivity">
-
-             <intent-filter>
+        <activity android:name=".activities.FieldworkListActivity" />
+        <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.SplashActivity">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

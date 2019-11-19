@@ -19,6 +19,9 @@
     <string name="hint_email">Fieldwork Title</string>
     <string name="hint_password">Description </string>
     <string name="button_login">Login</string>
+    <string name="button_signUp">Sign UP</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="enter_email">Please enter Your Email</string>
+    <string name="enter_valid_user">User details are not valid</string>
 
 </resources>

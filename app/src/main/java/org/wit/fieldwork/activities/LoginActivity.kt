@@ -18,42 +18,46 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
 
     lateinit var app: MainApp
     var user = UserModel()
-  //  var homer = ("homer", "secret")
-
+  
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
         info("Placemark Activity started..")
         app = application as MainApp
-        user.email = "homer"
-        user.password = "secret"
-        app.users.createUser(user.copy())
 
-
-        btnLogin.setOnClickListener() {
-            info("Login Button Pressed")
-            startActivityForResult<FieldworkListActivity>(0)
-
-
-
-
-          /*  user.email = email.text.toString()
+        btnSignUp.setOnClickListener() {
+            info("SignUp Button Pressed")
+            user.email = email.text.toString()
             user.password = password.text.toString()
 
             if (user.email.isEmpty()) {
-                toast(R.string.enter_fieldwork_title)
+                toast(R.string.enter_email)
             } else {
 
-                    app.fieldworks.login(user.copy())
+                app.users.createUser(user.copy())
+                startActivityForResult<FieldworkListActivity>(0)
 
-
-
-            // info("add Button Pressed: $fieldmarkTitle")
-            //setResult(AppCompatActivity.RESULT_OK)
-            //finish()
-        }*/
+            finish()
+        }
 
         }
+
+       btnLogin.setOnClickListener() {
+           info("SignUp Button Pressed")
+           user.email = email.text.toString()
+           user.password = password.text.toString()
+
+           val userList = app.users.findAllUsers() as ArrayList<UserModel>
+
+           var foundUser: UserModel? = userList.find { p -> p.email == user.email }
+           if (foundUser != null && foundUser.password == user.password) {
+               startActivityForResult<FieldworkListActivity>(0)
+               info(user)
+               finish()
+           } else {
+               toast(R.string.enter_valid_user)
+           }
+       }
     }
 }

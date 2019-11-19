@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_fieldwork_list.*
 import org.wit.fieldwork.R
 
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -15,7 +16,7 @@ import java.lang.Exception
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
-    private val splashTime = 3000
+    private val splashTime = 6000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

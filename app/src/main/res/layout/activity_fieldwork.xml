@@ -120,9 +120,9 @@
 
                 <CheckBox
                     android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="200dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="68dp"
                     android:text="Visited Site"
                     app:layout_constraintStart_toStartOf="parent"

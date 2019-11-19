@@ -58,6 +58,7 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
             foundFieldwork.lat = fieldwork.lat
             foundFieldwork.lng = fieldwork.lng
             foundFieldwork.zoom = fieldwork.zoom
+            foundFieldwork.visited = fieldwork.visited
         }
 
         serialize()

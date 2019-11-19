@@ -18,8 +18,8 @@
     <string name="title_activity_map">Map</string>
     <string name="change_fieldwork_image">Change fieldwork image</string>
 
-    <string name="hint_email">Fieldwork Title</string>
-    <string name="hint_password">Description </string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password </string>
     <string name="button_login">Login</string>
     <string name="button_signUp">Sign UP</string>
     <string name="title_activity_splash">SplashActivity</string>

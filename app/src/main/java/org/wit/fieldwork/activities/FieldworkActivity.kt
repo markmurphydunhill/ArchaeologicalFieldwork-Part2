@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.CheckBox
 import kotlinx.android.synthetic.main.activity_fieldwork.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -26,7 +28,6 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
     val IMAGE1_REQUEST = 1
     val IMAGE2_REQUEST = 3
     val LOCATION_REQUEST = 2
-   // var location = Location(52.245696, -7.139102, 15f)
 
     lateinit var app: MainApp
 
@@ -48,6 +49,7 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             fieldwork = intent.extras?.getParcelable<FieldworkModel>("fieldwork_edit")!!
             fieldworkTitle.setText(fieldwork.title)
             fieldworkDescription.setText(fieldwork.description)
+            //checkBox.(fieldwork.visited)
             fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
             fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2)
             )
@@ -91,9 +93,9 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
-        btnDel.setOnClickListener {
+       /* btnDel.setOnClickListener {isChecked-->
             info ("Delete button Pressed")
-        }
+        }*/
 
 
         chooseImage1.setOnClickListener {
@@ -105,6 +107,20 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             showImagePicker(this, IMAGE2_REQUEST)
 
         }
+
+
+        checkBox.setOnClickListener(View.OnClickListener {
+
+
+            if (checkBox.isChecked) {
+                info ("Check Box Checked")
+                fieldwork.visited = true
+            } else {
+                info ("Check Box is not Checked")
+                fieldwork.visited = false
+            }
+        })
+
 
 
     }

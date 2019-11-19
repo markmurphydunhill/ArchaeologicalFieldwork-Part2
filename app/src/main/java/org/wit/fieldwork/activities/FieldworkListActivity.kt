@@ -24,16 +24,11 @@ import org.wit.fieldwork.models.UserModel
 class FieldworkListActivity : AppCompatActivity(), FieldworkListener {
 
     lateinit var app: MainApp
-//    var user = UserModel()
-    //var homer = ("homer@homer.com","secret")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fieldwork_list)
         app = application as MainApp
-
-
 
         toolbar.title = title
         setSupportActionBar(toolbar)
@@ -51,6 +46,9 @@ class FieldworkListActivity : AppCompatActivity(), FieldworkListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<FieldworkActivity>(0)
+        }
+        when (item?.itemId){
+            R.id.item_logout -> finish()
         }
         return super.onOptionsItemSelected(item)
     }

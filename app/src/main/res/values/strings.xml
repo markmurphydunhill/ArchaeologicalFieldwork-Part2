@@ -25,5 +25,6 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="enter_email">Please enter Your Email</string>
     <string name="enter_valid_user">User details are not valid</string>
+    <string name="logout">Logout</string>
 
 </resources>

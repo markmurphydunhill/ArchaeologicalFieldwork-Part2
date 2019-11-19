@@ -23,7 +23,8 @@ import org.wit.fieldwork.models.Location
 class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
     var fieldwork = FieldworkModel()
-    val IMAGE_REQUEST = 1
+    val IMAGE1_REQUEST = 1
+    val IMAGE2_REQUEST = 3
     val LOCATION_REQUEST = 2
    // var location = Location(52.245696, -7.139102, 15f)
 
@@ -47,9 +48,14 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             fieldwork = intent.extras?.getParcelable<FieldworkModel>("fieldwork_edit")!!
             fieldworkTitle.setText(fieldwork.title)
             fieldworkDescription.setText(fieldwork.description)
-            fieldworkImage.setImageBitmap(readImageFromPath(this, fieldwork.image))
-            if (fieldworkImage != null) {
-                chooseImage.setText(R.string.update_image)
+            fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
+            fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2)
+            )
+            if (fieldworkImage1 != null) {
+                chooseImage1.setText(R.string.update_image1)
+            }
+            if (fieldworkImage2 != null) {
+                chooseImage2.setText(R.string.update_image2)
             }
             btnAdd.setText(R.string.save_fieldwork)
         }
@@ -90,8 +96,13 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
         }
 
 
-        chooseImage.setOnClickListener {
-            showImagePicker(this, IMAGE_REQUEST)
+        chooseImage1.setOnClickListener {
+            showImagePicker(this, IMAGE1_REQUEST)
+
+        }
+
+        chooseImage2.setOnClickListener {
+            showImagePicker(this, IMAGE2_REQUEST)
 
         }
 
@@ -114,11 +125,18 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            IMAGE_REQUEST -> {
+            IMAGE1_REQUEST -> {
                 if (data != null) {
-                    fieldwork.image = data.getData().toString()
-                    fieldworkImage.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage.setText(R.string.change_fieldwork_image)
+                    fieldwork.image1 = data.getData().toString()
+                    fieldworkImage1.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage1.setText(R.string.change_fieldwork_image)
+                }
+            }
+            IMAGE2_REQUEST -> {
+                if (data != null) {
+                    fieldwork.image2 = data.getData().toString()
+                    fieldworkImage2.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage2.setText(R.string.change_fieldwork_image)
                 }
             }
             LOCATION_REQUEST -> {

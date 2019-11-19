@@ -16,7 +16,7 @@ import java.lang.Exception
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
-    private val splashTime = 6000
+    private val splashTime = 4000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

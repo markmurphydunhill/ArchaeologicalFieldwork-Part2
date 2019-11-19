@@ -40,7 +40,8 @@ class FieldworkAdapter constructor(
         fun bind(fieldwork: FieldworkModel, listener: FieldworkListener) {
             itemView.fieldworkTitle.text = fieldwork.title
             itemView.fieldworkDescription.text = fieldwork.description
-            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, fieldwork.image))
+            itemView.imageIcon1.setImageBitmap(readImageFromPath(itemView.context, fieldwork.image1))
+            itemView.imageIcon2.setImageBitmap(readImageFromPath(itemView.context, fieldwork.image2))
             itemView.setOnClickListener { listener.onFieldworkClick(fieldwork) }
         }
     }

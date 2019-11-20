@@ -93,9 +93,7 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
-       /* btnDel.setOnClickListener {isChecked-->
-            info ("Delete button Pressed")
-        }*/
+
 
 
         chooseImage1.setOnClickListener {
@@ -107,6 +105,12 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             showImagePicker(this, IMAGE2_REQUEST)
 
         }
+
+     /*   btnDel.setOnClickListener {
+            app.fieldworks.delete(fieldwork)
+            finish()
+            info ("Delete button Pressed")
+        }*/
 
 
         checkBox.setOnClickListener(View.OnClickListener {
@@ -124,6 +128,8 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
 
     }
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_fieldwork, menu)
         return super.onCreateOptionsMenu(menu)
@@ -135,6 +141,7 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
                 finish()
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 

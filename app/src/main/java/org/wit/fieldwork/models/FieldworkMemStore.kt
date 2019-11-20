@@ -47,5 +47,5 @@ class FieldworkMemStore : FieldworkStore, AnkoLogger {
 
     }
 
-
+  override fun delete(fieldwork: FieldworkModel){}
 }*/

@@ -43,6 +43,16 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
         serialize()
     }
 
+   /* override fun delete (fieldwork: FieldworkModel){
+
+
+    }
+
+    {
+
+       // fieldworks.remove(fieldwork)
+       // serialize()
+    }*/
 
 
     override fun update(fieldwork: FieldworkModel) {
@@ -63,6 +73,7 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
 
         serialize()
     }
+
 
 
 

@@ -35,6 +35,7 @@
         <activity android:name=".activities.FieldworkActivity" />
         <activity android:name=".activities.FieldworkListActivity" />
         <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.SettingsActivity"/>
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

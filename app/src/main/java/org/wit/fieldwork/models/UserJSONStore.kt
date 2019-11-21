@@ -20,7 +20,6 @@ private val listType = object : TypeToken<java.util.ArrayList<UserModel>>() {}.t
 class UserJSONStore : UserStore, AnkoLogger {
 
     val context: Context
-   // var fieldworks = mutableListOf<FieldworkModel>()
     var users = mutableListOf<UserModel>()
 
 

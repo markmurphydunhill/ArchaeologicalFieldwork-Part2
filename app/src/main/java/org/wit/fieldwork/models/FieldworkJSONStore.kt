@@ -43,16 +43,11 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
         serialize()
     }
 
-   /* override fun delete (fieldwork: FieldworkModel){
+    override fun delete (fieldwork: FieldworkModel){
 
-
+        fieldworks.remove(fieldwork)
+        serialize()
     }
-
-    {
-
-       // fieldworks.remove(fieldwork)
-       // serialize()
-    }*/
 
 
     override fun update(fieldwork: FieldworkModel) {
@@ -65,6 +60,8 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
             foundFieldwork.description = fieldwork.description
             foundFieldwork.image1 = fieldwork.image1
             foundFieldwork.image2 = fieldwork.image2
+            foundFieldwork.image3 = fieldwork.image3
+            foundFieldwork.image4 = fieldwork.image4
             foundFieldwork.lat = fieldwork.lat
             foundFieldwork.lng = fieldwork.lng
             foundFieldwork.zoom = fieldwork.zoom

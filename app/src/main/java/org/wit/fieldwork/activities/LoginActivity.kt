@@ -9,8 +9,7 @@ import org.jetbrains.anko.toast
 import org.wit.fieldwork.R
 import org.wit.fieldwork.main.MainApp
 import org.wit.fieldwork.models.UserModel
-import android.content.Intent
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Class
+import kotlinx.android.synthetic.main.activity_login.toolbarAdd
 import org.jetbrains.anko.startActivityForResult
 
 
@@ -25,6 +24,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_login)
         info("Placemark Activity started..")
         app = application as MainApp
+        toolbarAdd.title = title
 
         btnSignUp.setOnClickListener() {
             info("SignUp Button Pressed")

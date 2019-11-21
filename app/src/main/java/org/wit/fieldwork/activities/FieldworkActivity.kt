@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.CheckBox
 import kotlinx.android.synthetic.main.activity_fieldwork.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -27,6 +26,8 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
     var fieldwork = FieldworkModel()
     val IMAGE1_REQUEST = 1
     val IMAGE2_REQUEST = 3
+    val IMAGE3_REQUEST = 4
+    val IMAGE4_REQUEST = 5
     val LOCATION_REQUEST = 2
 
     lateinit var app: MainApp
@@ -49,15 +50,22 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             fieldwork = intent.extras?.getParcelable<FieldworkModel>("fieldwork_edit")!!
             fieldworkTitle.setText(fieldwork.title)
             fieldworkDescription.setText(fieldwork.description)
-            //checkBox.(fieldwork.visited)
+            //checkBox(fieldwork.visited)
             fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
-            fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2)
-            )
+            fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
+            fieldworkImage3.setImageBitmap(readImageFromPath(this, fieldwork.image3))
+            fieldworkImage4.setImageBitmap(readImageFromPath(this, fieldwork.image4))
             if (fieldworkImage1 != null) {
                 chooseImage1.setText(R.string.update_image1)
             }
             if (fieldworkImage2 != null) {
                 chooseImage2.setText(R.string.update_image2)
+            }
+            if (fieldworkImage3 != null) {
+                chooseImage3.setText(R.string.update_image3)
+            }
+            if (fieldworkImage4 != null) {
+                chooseImage4.setText(R.string.update_image4)
             }
             btnAdd.setText(R.string.save_fieldwork)
         }
@@ -65,9 +73,7 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
             btnAdd.setOnClickListener() {
             fieldwork.title = fieldworkTitle.text.toString()
             fieldwork.description = fieldworkDescription.text.toString()
-            // if (fieldwork.title.isNotEmpty()) {
-            //   app.fieldworks.create(fieldwork.copy())
-            // info("add Button Pressed: ${fieldwork}")
+
             if (fieldwork.title.isEmpty()) {
                   toast(R.string.enter_fieldwork_title)
             } else {
@@ -106,16 +112,24 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
         }
 
-     /*   btnDel.setOnClickListener {
+        chooseImage3.setOnClickListener {
+            showImagePicker(this, IMAGE3_REQUEST)
+
+        }
+
+        chooseImage4.setOnClickListener {
+            showImagePicker(this, IMAGE4_REQUEST)
+
+        }
+
+       btnDel.setOnClickListener {
             app.fieldworks.delete(fieldwork)
             finish()
             info ("Delete button Pressed")
-        }*/
+        }
 
 
         checkBox.setOnClickListener(View.OnClickListener {
-
-
             if (checkBox.isChecked) {
                 info ("Check Box Checked")
                 fieldwork.visited = true
@@ -124,9 +138,6 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
                 fieldwork.visited = false
             }
         })
-
-
-
     }
 
 
@@ -152,14 +163,28 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     fieldwork.image1 = data.getData().toString()
                     fieldworkImage1.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage1.setText(R.string.change_fieldwork_image)
+                    chooseImage1.setText(R.string.update_image1)
                 }
             }
             IMAGE2_REQUEST -> {
                 if (data != null) {
                     fieldwork.image2 = data.getData().toString()
                     fieldworkImage2.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage2.setText(R.string.change_fieldwork_image)
+                    chooseImage2.setText(R.string.update_image2)
+                }
+            }
+            IMAGE3_REQUEST -> {
+                if (data != null) {
+                    fieldwork.image3 = data.getData().toString()
+                    fieldworkImage3.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage3.setText(R.string.update_image3)
+                }
+            }
+            IMAGE4_REQUEST -> {
+                if (data != null) {
+                    fieldwork.image4 = data.getData().toString()
+                    fieldworkImage4.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage4.setText(R.string.update_image4)
                 }
             }
             LOCATION_REQUEST -> {

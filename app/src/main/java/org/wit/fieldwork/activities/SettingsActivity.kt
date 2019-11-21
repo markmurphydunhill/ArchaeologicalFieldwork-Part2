@@ -4,20 +4,15 @@ package org.wit.fieldwork.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
 import org.wit.fieldwork.R
 import org.wit.fieldwork.main.MainApp
 import org.wit.fieldwork.models.FieldworkModel
-import android.content.Intent
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Class
 import kotlinx.android.synthetic.main.activity_settings.*
-import org.jetbrains.anko.startActivityForResult
+import kotlinx.android.synthetic.main.activity_settings.toolbarAdd
 
-var totalFieldworks = 0
-var totalVisited = 0
+
 
 
 class SettingsActivity : AppCompatActivity(), AnkoLogger {
@@ -31,6 +26,7 @@ class SettingsActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_settings)
         info("Settings Activity started..")
         app = application as MainApp
+        toolbarAdd.title = title
         var totalFieldworks = 0
         var totalVisited = 0
         val fieldworkList = app.fieldworks.findAll() as ArrayList<FieldworkModel>

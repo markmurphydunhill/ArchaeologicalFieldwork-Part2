@@ -39,6 +39,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:text="My Fieldworks Summary"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
                 <TextView
                     android:id="@+id/totalFieldworksSoFar"
                     android:layout_width="wrap_content"
@@ -72,11 +80,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.902" />
-
-
-
-
-
 
 
 

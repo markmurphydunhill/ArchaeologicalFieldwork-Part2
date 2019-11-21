@@ -47,7 +47,7 @@
                     android:autofillHints=""
                     android:hint="@string/hint_fieldworkTitle"
                     android:inputType="text"
-                    android:maxLength="25"
+                    android:maxLength="50"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
@@ -63,7 +63,7 @@
                     android:autofillHints=""
                     android:hint="@string/hint_fieldworkDescription"
                     android:inputType="text"
-                    android:maxLength="25"
+                    android:maxLength="250"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
@@ -104,6 +104,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:srcCompat="@mipmap/ic_launcher"/>
+
+                <Button
+                    android:id="@+id/chooseImage3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/button_addImage3"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/fieldworkImage3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher"/>
+
+                <Button
+                    android:id="@+id/chooseImage4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/button_addImage4"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/fieldworkImage4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher"/>
+
 
                 <Button
                     android:id="@+id/placemarkLocation"

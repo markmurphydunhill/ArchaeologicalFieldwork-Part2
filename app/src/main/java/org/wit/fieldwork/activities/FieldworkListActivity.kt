@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_fieldwork_list.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import org.wit.fieldwork.R
 import org.wit.fieldwork.main.MainApp
@@ -45,6 +46,9 @@ class FieldworkListActivity : AppCompatActivity(), FieldworkListener {
         }
         when (item?.itemId) {
             R.id.item_settings -> startActivityForResult<SettingsActivity>(0)
+        }
+        when (item?.itemId){
+            R.id.item_map -> startActivity<FieldworkMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }

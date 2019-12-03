@@ -9,6 +9,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_fieldwork.*
+import kotlinx.android.synthetic.main.activity_fieldwork.fieldworkTitle
+import kotlinx.android.synthetic.main.card_fieldwork.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -49,7 +51,7 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
             fieldwork = intent.extras?.getParcelable<FieldworkModel>("fieldwork_edit")!!
             fieldworkTitle.setText(fieldwork.title)
-            fieldworkDescription.setText(fieldwork.description)
+            fieldworkDesc.setText(fieldwork.description)
             //checkBox(fieldwork.visited)
             fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
             fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
@@ -72,7 +74,7 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
 
             btnAdd.setOnClickListener() {
             fieldwork.title = fieldworkTitle.text.toString()
-            fieldwork.description = fieldworkDescription.text.toString()
+            //fieldwork.description = fieldworkDescription.text.toString()
 
             if (fieldwork.title.isEmpty()) {
                   toast(R.string.enter_fieldwork_title)

@@ -35,4 +35,9 @@
     <string name="total_visited">Total Visited</string>
     <string name="total_fieldworks">Total Fieldworks</string>
 
+    <string name="title_activity_fieldwork_maps">Map of All Fieldworks</string>
+    <string name="fieldwork_image_placeholder">Fieldwork Image</string>
+    <string name="fieldwork_title_placeholder">Fieldwork Title</string>
+    <string name="fieldwork_description_placeholder">Fieldwork Description</string>
+
 </resources>

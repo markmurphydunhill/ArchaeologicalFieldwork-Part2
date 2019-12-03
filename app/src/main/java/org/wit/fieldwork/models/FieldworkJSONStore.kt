@@ -72,6 +72,10 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
     }
 
 
+    override fun findById(id:Long) : FieldworkModel? {
+        val foundPlacemark: FieldworkModel? = fieldworks.find { it.id == id }
+        return foundPlacemark
+    }
 
 
     private fun serialize() {

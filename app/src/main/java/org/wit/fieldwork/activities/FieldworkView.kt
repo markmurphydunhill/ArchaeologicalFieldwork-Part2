@@ -1,7 +1,126 @@
 package org.wit.fieldwork.activities
 
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_fieldwork.*
+import kotlinx.android.synthetic.main.activity_fieldwork.fieldworkTitle
+import kotlinx.android.synthetic.main.card_fieldwork.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.toast
+import org.wit.fieldwork.R
+import org.wit.fieldwork.helpers.readImageFromPath
+import org.wit.fieldwork.models.FieldworkModel
+
+class FieldworkView : AppCompatActivity(), AnkoLogger {
+
+    lateinit var presenter: FieldworkPresenter
+    var fieldwork = FieldworkModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_fieldwork)
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
+
+        presenter = FieldworkPresenter(this)
+
+        btnAdd.setOnClickListener {
+            if (fieldworkTitle.text.toString().isEmpty()) {
+                toast(R.string.enter_fieldwork_title)
+            } else {
+                presenter.doAddOrSave(fieldworkTitle.text.toString(), fieldworkDescription.text.toString())
+            }
+        }
+
+       // chooseImage.setOnClickListener { presenter.doSelectImage() }
+
+        chooseImage1.setOnClickListener {
+            presenter.doSelectImage()
+
+        }
+/*
+        chooseImage2.setOnClickListener {
+            presenter.doSelectImage()
+1
+        }
+
+        chooseImage3.setOnClickListener {
+            presenter.doSelectImage()
+
+        }
+
+        chooseImage4.setOnClickListener {
+            presenter.doSelectImage()
+
+        }*/
 
 
+       /* placemarkLocation.setOnClickListener { presenter.doSetLocation() }*/
+
+        btnDel.setOnClickListener {
+            presenter.doDelete()
+        }
+
+
+
+
+    }
+
+    fun showFieldwork(fieldwork: FieldworkModel) {
+        fieldworkTitle.setText(fieldwork.title)
+        fieldworkDesc.setText(fieldwork.description)
+
+        //checkbox
+        fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
+        fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
+        fieldworkImage3.setImageBitmap(readImageFromPath(this, fieldwork.image3))
+        fieldworkImage4.setImageBitmap(readImageFromPath(this, fieldwork.image4))
+        if (fieldworkImage1 != null) {
+            chooseImage1.setText(R.string.update_image1)
+        }
+        if (fieldworkImage2 != null) {
+            chooseImage2.setText(R.string.update_image2)
+        }
+        if (fieldworkImage3 != null) {
+            chooseImage3.setText(R.string.update_image3)
+        }
+        if (fieldworkImage4 != null) {
+            chooseImage4.setText(R.string.update_image4)
+        }
+
+        btnAdd.setText(R.string.save_fieldwork)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_fieldwork, menu)
+        if (presenter.edit) menu.getItem(0).setVisible(true)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+          /*  R.id.item_delete -> {
+                presenter.doDelete()
+            }*/
+            R.id.item_cancel -> {
+                presenter.doCancel()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            presenter.doActivityResult(requestCode, resultCode, data)
+        }
+    }
+}
+
+/*
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,7 +142,7 @@ import org.wit.fieldwork.helpers.readImageFromPath
 import org.wit.fieldwork.helpers.showImagePicker
 import org.wit.fieldwork.models.Location
 
-class FieldworkActivity : AppCompatActivity(), AnkoLogger {
+class FieldworkView : AppCompatActivity(), AnkoLogger {
 
     var fieldwork = FieldworkModel()
     val IMAGE1_REQUEST = 1
@@ -201,3 +320,4 @@ class FieldworkActivity : AppCompatActivity(), AnkoLogger {
     }
 
 }
+*/

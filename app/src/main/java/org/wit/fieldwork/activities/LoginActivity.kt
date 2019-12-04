@@ -11,6 +11,7 @@ import org.wit.fieldwork.main.MainApp
 import org.wit.fieldwork.models.UserModel
 import kotlinx.android.synthetic.main.activity_login.toolbarAdd
 import org.jetbrains.anko.startActivityForResult
+import org.wit.fieldwork.views.fieldworkList.FieldworkListView
 
 
 class LoginActivity : AppCompatActivity(), AnkoLogger {
@@ -36,7 +37,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
             } else {
 
                 app.users.createUser(user.copy())
-                startActivityForResult<FieldworkListActivity>(0)
+                startActivityForResult<FieldworkListView>(0)
 
             finish()
         }
@@ -52,7 +53,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
 
            var foundUser: UserModel? = userList.find { p -> p.email == user.email }
            if (foundUser != null && foundUser.password == user.password) {
-               startActivityForResult<FieldworkListActivity>(0)
+               startActivityForResult<FieldworkListView>(0)
                info(user)
                finish()
            } else {

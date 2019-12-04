@@ -13,9 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.FieldworkMapsActivity"
+            android:name=".views.map.FieldworkMapsView"
             android:label="@string/title_activity_fieldwork_maps"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
 
 
         <meta-data
@@ -23,14 +24,15 @@
             android:value="AIzaSyAAP1BfbFhr9HDKKwu_TepQeLRZcLmFpmY" />
 
         <activity
-            android:name=".activities.MapActivity"
+            android:name=".views.editLocation.EditLocationView"
             android:label="@string/title_activity_map" />
 
-        <activity android:name=".activities.FieldworkView" />
-        <activity android:name=".activities.MapPresenter" />
-        <activity android:name=".activities.FieldworkPresenter" />
-        <activity android:name=".activities.FieldworkListPresenter" />
-        <activity android:name=".activities.FieldworkListActivity" />
+
+
+        <activity android:name=".views.fieldwork.FieldworkView" />
+
+        <activity android:name=".views.fieldworkList.FieldworkListView" />
+
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.SplashActivity">

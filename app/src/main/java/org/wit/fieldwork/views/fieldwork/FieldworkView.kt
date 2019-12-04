@@ -1,4 +1,4 @@
-package org.wit.fieldwork.activities
+package org.wit.fieldwork.views.fieldwork
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,12 +9,15 @@ import kotlinx.android.synthetic.main.activity_fieldwork.*
 import kotlinx.android.synthetic.main.activity_fieldwork.fieldworkTitle
 import kotlinx.android.synthetic.main.card_fieldwork.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.fieldwork.R
 import org.wit.fieldwork.helpers.readImageFromPath
 import org.wit.fieldwork.models.FieldworkModel
+import org.wit.fieldwork.views.BaseView
 
-class FieldworkView : AppCompatActivity(), AnkoLogger {
+//class FieldworkView : AppCompatActivity(), AnkoLogger {
+class FieldworkView : BaseView(), AnkoLogger {
 
     lateinit var presenter: FieldworkPresenter
     var fieldwork = FieldworkModel()
@@ -22,54 +25,83 @@ class FieldworkView : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fieldwork)
-        toolbarAdd.title = title
+
+
+
+         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
         presenter = FieldworkPresenter(this)
 
         btnAdd.setOnClickListener {
+            info("clicking Add/update")
             if (fieldworkTitle.text.toString().isEmpty()) {
                 toast(R.string.enter_fieldwork_title)
             } else {
-                presenter.doAddOrSave(fieldworkTitle.text.toString(), fieldworkDescription.text.toString())
+
+                //presenter.doAddOrSave(fieldworkTitle.text.toString(), fieldworkDescription.text.toString())
+                presenter.doAddOrSave(fieldworkTitle.text.toString(), fieldworkDesc.text.toString())
+
             }
         }
 
        // chooseImage.setOnClickListener { presenter.doSelectImage() }
 
         chooseImage1.setOnClickListener {
-            presenter.doSelectImage()
+            presenter.doSelectImage1()
 
         }
-/*
+
         chooseImage2.setOnClickListener {
-            presenter.doSelectImage()
-1
+            presenter.doSelectImage2()
+
         }
 
         chooseImage3.setOnClickListener {
-            presenter.doSelectImage()
+            presenter.doSelectImage3()
 
         }
 
         chooseImage4.setOnClickListener {
-            presenter.doSelectImage()
+            presenter.doSelectImage4()
 
-        }*/
+        }
 
 
-       /* placemarkLocation.setOnClickListener { presenter.doSetLocation() }*/
+        placemarkLocation.setOnClickListener { presenter.doSetLocation() }
 
         btnDel.setOnClickListener {
             presenter.doDelete()
         }
 
-
-
-
     }
 
-    fun showFieldwork(fieldwork: FieldworkModel) {
+    override fun showFieldwork(fieldwork: FieldworkModel) {
+        fieldworkTitle.setText(fieldwork.title)
+        fieldworkDesc.setText(fieldwork.description)
+        fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
+        fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
+        fieldworkImage3.setImageBitmap(readImageFromPath(this, fieldwork.image3))
+        fieldworkImage4.setImageBitmap(readImageFromPath(this, fieldwork.image4))
+        if (fieldworkImage1 != null) {
+            chooseImage1.setText(R.string.update_image1)
+        }
+        if (fieldworkImage2 != null) {
+            chooseImage2.setText(R.string.update_image2)
+        }
+        if (fieldworkImage3 != null) {
+            chooseImage3.setText(R.string.update_image3)
+        }
+        if (fieldworkImage4 != null) {
+            chooseImage4.setText(R.string.update_image4)
+        }
+
+        btnAdd.setText(R.string.save_fieldwork)
+       //lat.setText("%.6f".format(fieldwork.lat))
+       //lng.setText("%.6f".format(fieldwork.lng))
+    }
+
+  /*  fun showFieldwork(fieldwork: FieldworkModel) {
         fieldworkTitle.setText(fieldwork.title)
         fieldworkDesc.setText(fieldwork.description)
 
@@ -93,7 +125,7 @@ class FieldworkView : AppCompatActivity(), AnkoLogger {
 
         btnAdd.setText(R.string.save_fieldwork)
     }
-
+*/
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_fieldwork, menu)
         if (presenter.edit) menu.getItem(0).setVisible(true)
@@ -217,7 +249,7 @@ class FieldworkView : AppCompatActivity(), AnkoLogger {
                 location.lng = fieldwork.lng
                 location.zoom = fieldwork.zoom
             }
-            startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
+            startActivityForResult(intentFor<EditLocationView>().putExtra("location", location), LOCATION_REQUEST)
         }
 
 

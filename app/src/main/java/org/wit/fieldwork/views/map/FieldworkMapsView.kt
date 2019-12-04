@@ -1,5 +1,71 @@
-package org.wit.fieldwork.activities
+package org.wit.fieldwork.views.map
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.Marker
+import org.wit.fieldwork.R
+import kotlinx.android.synthetic.main.activity_fieldwork_maps.*
+import kotlinx.android.synthetic.main.content_fieldwork_maps.*
+import org.wit.fieldwork.helpers.readImageFromPath
+import org.wit.fieldwork.models.FieldworkModel
+import org.wit.fieldwork.views.map.FieldworkMapsPresenter
+
+
+class FieldworkMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+
+    lateinit var presenter: FieldworkMapsPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_fieldwork_maps)
+        setSupportActionBar(toolbar)
+        presenter = FieldworkMapsPresenter(this)
+
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync {
+            presenter.doPopulateMap(it)
+        }
+    }
+
+    fun showFieldwork(fieldwork: FieldworkModel) {
+        currentTitle.text = fieldwork.title
+        currentDescription.text = fieldwork.description
+        currentImage.setImageBitmap(readImageFromPath(this, fieldwork.image1))
+
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        presenter.doMarkerSelected(marker)
+        return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+}
+/*
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -14,7 +80,7 @@ import kotlinx.android.synthetic.main.content_fieldwork_maps.*
 import org.wit.fieldwork.helpers.readImageFromPath
 import org.wit.fieldwork.main.MainApp
 
-class FieldworkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class FieldworkMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     lateinit var map: GoogleMap
     lateinit var app: MainApp
@@ -75,4 +141,4 @@ class FieldworkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListen
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
     }
-}
+}*/

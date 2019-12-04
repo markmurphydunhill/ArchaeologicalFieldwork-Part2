@@ -1,4 +1,4 @@
-package org.wit.fieldwork.activities
+package org.wit.fieldwork.views.editLocation
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.fieldwork.models.Location
 
-class MapPresenter(val view: MapActivity) {
+class MapPresenter(val view: EditLocationView) {
 
     var location = Location()
 

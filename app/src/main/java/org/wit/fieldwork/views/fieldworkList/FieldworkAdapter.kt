@@ -1,4 +1,4 @@
-package org.wit.fieldwork.activities
+package org.wit.fieldwork.views.fieldworkList
 
 import android.view.LayoutInflater
 import android.view.View

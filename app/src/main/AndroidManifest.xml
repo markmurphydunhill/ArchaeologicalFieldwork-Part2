@@ -27,6 +27,7 @@
             android:label="@string/title_activity_map" />
 
         <activity android:name=".activities.FieldworkView" />
+        <activity android:name=".activities.MapPresenter" />
         <activity android:name=".activities.FieldworkPresenter" />
         <activity android:name=".activities.FieldworkListPresenter" />
         <activity android:name=".activities.FieldworkListActivity" />

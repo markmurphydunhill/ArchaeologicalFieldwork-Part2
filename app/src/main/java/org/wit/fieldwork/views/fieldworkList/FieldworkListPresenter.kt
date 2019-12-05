@@ -1,6 +1,8 @@
 package org.wit.fieldwork.views.fieldworkList
 
 
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.fieldwork.activities.SettingsActivity
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.views.BasePresenter
@@ -22,7 +24,12 @@ class FieldworkListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun loadFieldworks() {
-        view?.showFieldworks(app.fieldworks.findAll())
+        doAsync {
+            val fieldworks = app.fieldworks.findAll()
+            uiThread {
+                view?.showFieldworks(fieldworks)
+            }
+        }
     }
 
     fun doLogout(){

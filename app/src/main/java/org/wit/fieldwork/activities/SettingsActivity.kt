@@ -11,8 +11,7 @@ import org.wit.fieldwork.main.MainApp
 import org.wit.fieldwork.models.FieldworkModel
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_settings.toolbarAdd
-
-
+import org.jetbrains.anko.doAsync
 
 
 class SettingsActivity : AppCompatActivity(), AnkoLogger {
@@ -29,7 +28,14 @@ class SettingsActivity : AppCompatActivity(), AnkoLogger {
         toolbarAdd.title = title
         var totalFieldworks = 0
         var totalVisited = 0
-        val fieldworkList = app.fieldworks.findAll() as ArrayList<FieldworkModel>
+        //val fieldworkList = app.fieldworks.findAll() as ArrayList<FieldworkModel>
+        //val fieldworkList = doAsync { app.fieldworks.findAll() as ArrayList<FieldworkModel>}
+        //val fieldworkList = findAllFieldworks()
+        //val first = fieldworkList[0]
+
+        info ("HELLO " )
+
+
         for (fieldwork in fieldworkList) {
             totalFieldworks++
 
@@ -48,8 +54,12 @@ class SettingsActivity : AppCompatActivity(), AnkoLogger {
 
     }
 
+     fun findAllFieldworks(){
+
+        doAsync { app.fieldworks.findAll() as ArrayList<FieldworkModel>}
+        return
+    }
 
 
     }
-
 

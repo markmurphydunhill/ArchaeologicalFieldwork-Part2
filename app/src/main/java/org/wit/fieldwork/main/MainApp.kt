@@ -8,6 +8,7 @@ import org.wit.fieldwork.models.FieldworkJSONStore
 //import org.wit.fieldwork.models.FieldworkMemStore
 import org.wit.fieldwork.models.UserJSONStore
 import org.wit.fieldwork.models.UserStore
+import org.wit.fieldwork.models.room.FieldworkStoreRoom
 
 
 class MainApp : Application(), AnkoLogger {
@@ -17,7 +18,7 @@ class MainApp : Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        fieldworks = FieldworkJSONStore(applicationContext)
+        fieldworks = FieldworkStoreRoom(applicationContext)
         users = UserJSONStore(applicationContext)
         info("Fieldwork started")
     }

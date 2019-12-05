@@ -4,6 +4,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.views.BasePresenter
 import org.wit.fieldwork.views.BaseView
@@ -22,13 +24,21 @@ class FieldworkMapsPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doMarkerSelected(marker: Marker) {
         val tag = marker.tag as Long
-        val fieldwork = app.fieldworks.findById(tag)
-        if (fieldwork != null) view?.showFieldwork(fieldwork)
-
+        doAsync {
+            val fieldwork = app.fieldworks.findById(tag)
+            uiThread {
+                if (fieldwork != null) view?.showFieldwork(fieldwork)
+            }
+        }
     }
 
     fun loadFieldworks() {
-        view?.showFieldworks(app.fieldworks.findAll())
+        doAsync {
+            val fieldworks = app.fieldworks.findAll()
+            uiThread {
+                view?.showFieldworks(fieldworks)
+            }
+        }
     }
 }
 /*

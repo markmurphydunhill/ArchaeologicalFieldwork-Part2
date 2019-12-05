@@ -2,15 +2,13 @@ package org.wit.fieldwork.views.fieldwork
 
 import android.content.Intent
 import kotlinx.android.synthetic.main.activity_fieldwork.*
+import org.jetbrains.anko.*
 
 
 import org.wit.fieldwork.helpers.showImagePicker
 import org.wit.fieldwork.models.Location
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.views.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
 import org.wit.fieldwork.R
 
 class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
@@ -30,15 +28,18 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
 
     fun doAddOrSave(title: String, description: String) {
-        info("doAddor save")
         fieldwork.title = title
         fieldwork.description = description
-        if (edit) {
-            app.fieldworks.update(fieldwork)
-        } else {
-            app.fieldworks.create(fieldwork)
+        doAsync {
+            if (edit) {
+                app.fieldworks.update(fieldwork)
+            } else {
+                app.fieldworks.create(fieldwork)
+            }
+            uiThread {
+                view?.finish()
+            }
         }
-        view?.finish()
     }
 
     fun doCancel() {

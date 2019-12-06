@@ -9,6 +9,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.fieldwork.activities.SettingsActivity
 
 import org.wit.fieldwork.models.FieldworkModel
+import org.wit.fieldwork.models.Location
 import org.wit.fieldwork.views.editLocation.EditLocationView
 import org.wit.fieldwork.views.map.FieldworkMapsView
 import org.wit.fieldwork.views.fieldwork.FieldworkView
@@ -74,5 +75,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
     open fun showFieldworks(fieldworks: List<FieldworkModel>) {}
     open fun showProgress() {}
     open fun hideProgress() {}
+
+    open fun showLocation(location : Location) {}
 }
 

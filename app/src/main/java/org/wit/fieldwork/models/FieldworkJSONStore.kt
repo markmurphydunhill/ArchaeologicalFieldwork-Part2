@@ -62,6 +62,7 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
             foundFieldwork.image2 = fieldwork.image2
             foundFieldwork.image3 = fieldwork.image3
             foundFieldwork.image4 = fieldwork.image4
+            //foundFieldwork.location = fieldwork.location
             foundFieldwork.lat = fieldwork.lat
             foundFieldwork.lng = fieldwork.lng
             foundFieldwork.zoom = fieldwork.zoom

@@ -46,6 +46,8 @@
                 android:layout_alignParentBottom="true">
 
 
+
+
                 <EditText
                     android:id="@+id/fieldworkTitle"
                     android:layout_width="match_parent"
@@ -103,7 +105,7 @@
 
                 <ImageView
                     android:id="@+id/fieldworkImage1"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
@@ -220,9 +222,22 @@
                     android:text="@string/button_location"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/checkBox"
+                    app:layout_constraintBottom_toTopOf="@+id/mapView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="363dp"
+                    android:layout_height="162dp"
+                    android:layout_marginStart="180dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="181dp"
+                    android:layout_marginBottom="87dp"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
 
                 <CheckBox
                     android:id="@+id/checkBox"

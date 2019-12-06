@@ -29,37 +29,32 @@ class SettingsActivity : AppCompatActivity(), AnkoLogger {
         var totalFieldworks = 0
         var totalVisited = 0
         //val fieldworkList = app.fieldworks.findAll() as ArrayList<FieldworkModel>
-        //val fieldworkList = doAsync { app.fieldworks.findAll() as ArrayList<FieldworkModel>}
+        val fieldworkList = doAsync { app.fieldworks.findAll() as ArrayList<FieldworkModel>}
         //val fieldworkList = findAllFieldworks()
-        //val first = fieldworkList[0]
-
-        info ("HELLO " )
 
 
-        for (fieldwork in fieldworkList) {
+        info ("HELLO $fieldworkList " )
+
+
+       /* for (fieldwork in fieldworkList) {
             totalFieldworks++
 
         }
-        for (fieldwork in fieldworkList) {
-            if (fieldwork.visited == true)
-            {
-            totalVisited++
-        }
-         }
-        info("Total Fieldworks: $totalFieldworks")
-        info("Total Visited Fieldworks: $totalVisited")
 
+        for (fieldwork in fieldworkList) {
+            if (fieldwork.visited == true) {
+                totalVisited++
+            }
+        }*/
         totalFieldworksSoFar.text = ("Total Archaelogical Fieldworks added:  $totalFieldworks")
         totalVisistedSoFar.text = ("Total Archaelogical Fieldworks visited:  $totalVisited")
 
-    }
+         }
+        //info("Total Fieldworks: $totalFieldworks")
+        //info("Total Visited Fieldworks: $totalVisited")
 
-     fun findAllFieldworks(){
-
-        doAsync { app.fieldworks.findAll() as ArrayList<FieldworkModel>}
-        return
-    }
-
+      //  totalFieldworksSoFar.text = ("Total Archaelogical Fieldworks added:  $totalFieldworks")
+       // totalVisistedSoFar.text = ("Total Archaelogical Fieldworks visited:  $totalVisited")
 
     }
 

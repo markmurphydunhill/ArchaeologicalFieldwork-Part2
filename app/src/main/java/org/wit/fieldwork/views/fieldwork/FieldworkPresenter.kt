@@ -1,6 +1,13 @@
 package org.wit.fieldwork.views.fieldwork
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_fieldwork.*
 import org.jetbrains.anko.*
 
@@ -10,18 +17,28 @@ import org.wit.fieldwork.models.Location
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.views.*
 import org.wit.fieldwork.R
+import org.wit.fieldwork.helpers.checkLocationPermissions
+import org.wit.fieldwork.helpers.isPermissionGranted
 
 class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
     var fieldwork = FieldworkModel()
     var defaultLocation = Location(52.245696, -7.139102, 15f)
     var edit = false;
+    var map: GoogleMap? = null
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
 
     init {
         if (view.intent.hasExtra("fieldwork_edit")) {
             edit = true
             fieldwork = view.intent.extras?.getParcelable<FieldworkModel>("fieldwork_edit")!!
             view.showFieldwork(fieldwork)
+        } else {
+            // fieldwork.lat = defaultLocation.lat
+            //fieldwork.lng = defaultLocation.lng
+            if (checkLocationPermissions(view)) {
+                doSetCurrentLocation()
+            }
         }
     }
 
@@ -73,16 +90,7 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     }
 
     fun doSetLocation() {
-        if (edit == false) {
-            view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", defaultLocation)
-        } else {
-            view?.navigateTo(
-                VIEW.LOCATION,
-                LOCATION_REQUEST,
-                "location",
-                Location(fieldwork.lat, fieldwork.lng, fieldwork.zoom)
-            )
-        }
+        view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(fieldwork.lat, fieldwork.lng, fieldwork.zoom))
     }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -108,9 +116,45 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
                 fieldwork.lat = location.lat
                 fieldwork.lng = location.lng
                 fieldwork.zoom = location.zoom
+                locationUpdate(fieldwork.lat,fieldwork.lng)
             }
         }
     }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(fieldwork.lat, fieldwork.lng)
+    }
+
+    fun locationUpdate(lat: Double, lng: Double) {
+        fieldwork.lat = lat
+        fieldwork.lng = lng
+        fieldwork.zoom = 15f
+        map?.clear()
+        map?.uiSettings?.setZoomControlsEnabled(true)
+        val options = MarkerOptions().title(fieldwork.title).position(LatLng(fieldwork.lat, fieldwork.lng))
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(fieldwork.lat, fieldwork.lng), fieldwork.zoom))
+        view?.showFieldwork(fieldwork)
+    }
+
+
+    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
+        }
+    }
+
+
 }
 /*
 import android.content.Intent
@@ -120,20 +164,16 @@ import org.wit.fieldwork.main.MainApp
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.models.Location
 import org.wit.fieldwork.views.editLocation.EditLocationView
-
 class FieldworkPresenter(val view: FieldworkView) {
-
     val IMAGE_REQUEST = 1
     val IMAGE2_REQUEST = 3
     val IMAGE3_REQUEST = 4
     val IMAGE4_REQUEST = 5
     val LOCATION_REQUEST = 2
-
     var fieldwork = FieldworkModel()
     var location = Location(52.245696, -7.139102, 15f)
     var app: MainApp
     var edit = false;
-
     init {
         app = view.application as MainApp
         if (view.intent.hasExtra("fieldwork_edit")) {
@@ -142,7 +182,6 @@ class FieldworkPresenter(val view: FieldworkView) {
             view.showFieldwork(fieldwork)
         }
     }
-
     fun doAddOrSave(title: String, description: String) {
         fieldwork.title = title
         fieldwork.description = description
@@ -153,20 +192,16 @@ class FieldworkPresenter(val view: FieldworkView) {
         }
         view.finish()
     }
-
     fun doCancel() {
         view.finish()
     }
-
     fun doDelete() {
         app.fieldworks.delete(fieldwork)
         view.finish()
     }
-
     fun doSelectImage() {
         showImagePicker(view, IMAGE_REQUEST)
     }
-
     fun doSetLocation() {
         if (fieldwork.zoom != 0f) {
             location.lat = fieldwork.lat
@@ -175,7 +210,6 @@ class FieldworkPresenter(val view: FieldworkView) {
         }
         view.startActivityForResult(view.intentFor<EditLocationView>().putExtra("location", location), LOCATION_REQUEST)
     }
-
     fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
             IMAGE_REQUEST -> {

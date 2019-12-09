@@ -1,4 +1,4 @@
-package org.wit.fieldwork.activities
+/*package org.wit.fieldwork.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -61,4 +61,4 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
            }
        }
     }
-}
+}*/

@@ -26,6 +26,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password </string>
     <string name="button_login">Login</string>
+    <string name="title_activity_login"> Signup/Login</string>
     <string name="button_signUp">Sign UP</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="enter_email">Please enter Your Email</string>
@@ -39,5 +40,8 @@
     <string name="fieldwork_image_placeholder">Fieldwork Image</string>
     <string name="fieldwork_title_placeholder">Fieldwork Title</string>
     <string name="fieldwork_description_placeholder">Fieldwork Description</string>
+
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
 
 </resources>

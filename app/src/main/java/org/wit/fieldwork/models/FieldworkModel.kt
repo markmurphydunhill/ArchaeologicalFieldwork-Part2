@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import androidx.room.Embedded
 
 @Parcelize
 @Entity
@@ -14,10 +15,11 @@ data class FieldworkModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                           var image2: String = "",
                           var image3: String ="",
                           var image4: String = "",
-                          var lat : Double = 0.0,
-                          var lng: Double = 0.0,
-                          var zoom: Float = 0f,
-                          var visited: Boolean = false) : Parcelable
+                          //var lat : Double = 0.0,
+                          //var lng: Double = 0.0,
+                          //var zoom: Float = 0f,
+                          var visited: Boolean = false,
+                          @Embedded var location : Location = Location()): Parcelable
 
 @Parcelize
 data class Location(var lat: Double = 0.0,

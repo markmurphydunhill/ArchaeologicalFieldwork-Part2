@@ -3,8 +3,10 @@ package org.wit.fieldwork.views
 import android.content.Intent
 
 import android.os.Parcelable
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.fieldwork.activities.SettingsActivity
 
@@ -14,6 +16,7 @@ import org.wit.fieldwork.views.editLocation.EditLocationView
 import org.wit.fieldwork.views.map.FieldworkMapsView
 import org.wit.fieldwork.views.fieldwork.FieldworkView
 import org.wit.fieldwork.views.fieldworkList.FieldworkListView
+import org.wit.fieldwork.views.login.LoginView
 
 val IMAGE1_REQUEST = 1
 val LOCATION_REQUEST = 2
@@ -22,7 +25,7 @@ val IMAGE3_REQUEST = 4
 val IMAGE4_REQUEST = 5
 
 enum class VIEW {
-    LOCATION, FIELDWORK, MAPS, LIST, SETTINGS
+    LOCATION, FIELDWORK, MAPS, LIST, SETTINGS, LOGIN
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -37,6 +40,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.MAPS -> intent = Intent(this, FieldworkMapsView::class.java)
             VIEW.LIST -> intent = Intent(this, FieldworkListView::class.java)
             VIEW.SETTINGS -> intent = Intent(this, SettingsActivity::class.java)
+            VIEW.LOGIN -> intent = Intent (this, LoginView::class.java)
         }
         if (key != "") {
             intent.putExtra(key, value)
@@ -73,9 +77,12 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
     open fun showFieldwork(fieldwork: FieldworkModel) {}
     open fun showFieldworks(fieldworks: List<FieldworkModel>) {}
+
     open fun showProgress() {}
     open fun hideProgress() {}
 
+
     open fun showLocation(location : Location) {}
 }
+
 

@@ -8,6 +8,7 @@ import org.wit.fieldwork.R
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.fieldwork.main.MainApp
+import org.wit.fieldwork.views.login.LoginView
 
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
@@ -20,7 +21,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbar)
 
            Handler().postDelayed({
-               startActivityForResult<LoginActivity>(0)
+               startActivityForResult<LoginView>(0)
             finish()
         },splashTime.toLong())
 

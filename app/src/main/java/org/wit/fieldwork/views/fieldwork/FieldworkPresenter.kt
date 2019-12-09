@@ -3,6 +3,8 @@ package org.wit.fieldwork.views.fieldwork
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,7 +20,11 @@ import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.views.*
 import org.wit.fieldwork.R
 import org.wit.fieldwork.helpers.checkLocationPermissions
+import org.wit.fieldwork.helpers.createDefaultLocationRequest
 import org.wit.fieldwork.helpers.isPermissionGranted
+//import org.wit.fieldwork.models.location
+import org.wit.fieldwork.views.BasePresenter
+import org.wit.fieldwork.views.BaseView
 
 class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
@@ -27,7 +33,7 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     var edit = false;
     var map: GoogleMap? = null
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
-
+    val locationRequest = createDefaultLocationRequest()
     init {
         if (view.intent.hasExtra("fieldwork_edit")) {
             edit = true
@@ -64,8 +70,12 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     }
 
     fun doDelete() {
-        app.fieldworks.delete(fieldwork)
-        view?.finish()
+        doAsync {
+            app.fieldworks.delete(fieldwork)
+            uiThread {
+                view?.finish()
+            }
+        }
     }
 
     fun doSelectImage1() {
@@ -90,7 +100,7 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     }
 
     fun doSetLocation() {
-        view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(fieldwork.lat, fieldwork.lng, fieldwork.zoom))
+        view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(fieldwork.location.lat, fieldwork.location.lng, fieldwork.location.zoom))
     }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -113,28 +123,31 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
             }
             LOCATION_REQUEST -> {
                 val location = data.extras?.getParcelable<Location>("location")!!
-                fieldwork.lat = location.lat
-                fieldwork.lng = location.lng
-                fieldwork.zoom = location.zoom
-                locationUpdate(fieldwork.lat,fieldwork.lng)
+                //fieldwork.lat = location.lat
+                //fieldwork.lng = location.lng
+                //fieldwork.zoom = location.zoom
+                fieldwork.location = location
+                locationUpdate(location)
             }
         }
     }
 
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(fieldwork.lat, fieldwork.lng)
+        locationUpdate(fieldwork.location)
     }
 
-    fun locationUpdate(lat: Double, lng: Double) {
-        fieldwork.lat = lat
-        fieldwork.lng = lng
-        fieldwork.zoom = 15f
+    fun locationUpdate(location:Location) {
+       // fieldwork.lat = lat
+       // fieldwork.lng = lng
+       // fieldwork.zoom = 15f
+        fieldwork.location = location
+        fieldwork.location.zoom = 15f
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(fieldwork.title).position(LatLng(fieldwork.lat, fieldwork.lng))
+        val options = MarkerOptions().title(fieldwork.title).position(LatLng(fieldwork.location.lat, fieldwork.location.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(fieldwork.lat, fieldwork.lng), fieldwork.zoom))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(fieldwork.location.lat, fieldwork.location.lng), fieldwork.location.zoom))
         view?.showFieldwork(fieldwork)
     }
 
@@ -143,14 +156,30 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         if (isPermissionGranted(requestCode, grantResults)) {
             doSetCurrentLocation()
         } else {
-            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+            locationUpdate(defaultLocation)
         }
     }
+
 
     @SuppressLint("MissingPermission")
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
-            locationUpdate(it.latitude, it.longitude)
+            locationUpdate(Location(it.latitude, it.longitude))
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doResartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(Location(l.latitude, l.longitude))
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
         }
     }
 

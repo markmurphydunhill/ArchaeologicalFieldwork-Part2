@@ -62,10 +62,10 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
             foundFieldwork.image2 = fieldwork.image2
             foundFieldwork.image3 = fieldwork.image3
             foundFieldwork.image4 = fieldwork.image4
-            //foundFieldwork.location = fieldwork.location
-            foundFieldwork.lat = fieldwork.lat
-            foundFieldwork.lng = fieldwork.lng
-            foundFieldwork.zoom = fieldwork.zoom
+            foundFieldwork.location = fieldwork.location
+            //foundFieldwork.lat = fieldwork.lat
+            //foundFieldwork.lng = fieldwork.lng
+            //foundFieldwork.zoom = fieldwork.zoom
             foundFieldwork.visited = fieldwork.visited
         }
 
@@ -74,8 +74,8 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
 
 
     override fun findById(id:Long) : FieldworkModel? {
-        val foundPlacemark: FieldworkModel? = fieldworks.find { it.id == id }
-        return foundPlacemark
+        val foundFieldwork: FieldworkModel? = fieldworks.find { it.id == id }
+        return foundFieldwork
     }
 
 

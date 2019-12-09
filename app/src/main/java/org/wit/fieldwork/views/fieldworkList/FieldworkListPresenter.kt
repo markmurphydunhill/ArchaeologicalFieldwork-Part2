@@ -33,7 +33,7 @@ class FieldworkListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doLogout(){
-        view?.finish()
+        view?.navigateTo(VIEW.LOGIN)
     }
 
     fun doSettings(){

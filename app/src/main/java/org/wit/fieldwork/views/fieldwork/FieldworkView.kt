@@ -22,22 +22,26 @@ class FieldworkView : BaseView(), AnkoLogger {
 
     lateinit var presenter: FieldworkPresenter
     var fieldwork = FieldworkModel()
-    lateinit var map: GoogleMap
+    //lateinit var map: GoogleMap
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fieldwork)
+        super.init(toolbarAdd, true);
 
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
         presenter = FieldworkPresenter(this)
 
-        mapView.onCreate(savedInstanceState);
+
+      /* mapView.onCreate(savedInstanceState);
+
         mapView.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
-        }
+        }*/
 
         btnAdd.setOnClickListener {
             info("clicking Add/update")
@@ -74,6 +78,7 @@ class FieldworkView : BaseView(), AnkoLogger {
         }
 
     }
+
 
     override fun showFieldwork(fieldwork: FieldworkModel) {
         fieldworkTitle.setText(fieldwork.title)
@@ -148,7 +153,7 @@ class FieldworkView : BaseView(), AnkoLogger {
         }
     }
 
-    override fun onDestroy() {
+   /* override fun onDestroy() {
         super.onDestroy()
         mapView.onDestroy()
     }
@@ -171,7 +176,7 @@ class FieldworkView : BaseView(), AnkoLogger {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
-    }
+    }*/
 }
 
 

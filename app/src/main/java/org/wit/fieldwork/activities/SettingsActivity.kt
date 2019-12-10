@@ -4,6 +4,7 @@ package org.wit.fieldwork.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_fieldwork_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.fieldwork.R
@@ -26,6 +27,7 @@ class SettingsActivity : AppCompatActivity(), AnkoLogger {
         info("Settings Activity started..")
         app = application as MainApp
         toolbarAdd.title = title
+        //super.init(toolbar, true);
         var totalFieldworks = 0
         var totalVisited = 0
         //val fieldworkList = app.fieldworks.findAll() as ArrayList<FieldworkModel>

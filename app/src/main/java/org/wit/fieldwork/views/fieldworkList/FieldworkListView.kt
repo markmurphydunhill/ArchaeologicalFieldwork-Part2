@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_fieldwork_list.*
+import org.jetbrains.anko.doAsync
 import org.wit.fieldwork.R
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.views.BaseView
@@ -20,7 +21,7 @@ class FieldworkListView :  BaseView(), FieldworkListener {
         setSupportActionBar(toolbar)
 
         presenter = initPresenter(FieldworkListPresenter(this)) as FieldworkListPresenter
-
+        init(toolbar, false)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         presenter.loadFieldworks()
@@ -38,8 +39,8 @@ class FieldworkListView :  BaseView(), FieldworkListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> presenter.doAddFieldwork()
-            R.id.item_map -> presenter.doShowFieldworksMap()
+            R.id.item_add -> doAsync { presenter.doAddFieldwork()}
+            R.id.item_map -> doAsync{ presenter.doShowFieldworksMap()}
             R.id.item_logout -> presenter.doLogout()
             R.id.item_settings -> presenter.doSettings()
         }

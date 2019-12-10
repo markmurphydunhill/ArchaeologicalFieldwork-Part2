@@ -26,7 +26,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password </string>
     <string name="button_login">Login</string>
-    <string name="title_activity_login"> Signup/Login</string>
+    <string name="title_activity_login"> SignUp/Login</string>
     <string name="button_signUp">Sign UP</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="enter_email">Please enter Your Email</string>
@@ -43,5 +43,9 @@
 
     <string name="menu_showMap">Show Map</string>
     <string name="menu_logout">Logout</string>
+    <string name="menu_saveFieldwork">Save Fieldwork</string>
+    <string name="title_activity_fieldwork_list">Fieldworks</string>
+    <string name="title_activity_fieldwork">Fieldwork</string>
+    <string name="title_activity_edit_location">Fieldwork</string>
 
 </resources>

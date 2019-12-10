@@ -18,7 +18,7 @@ class FieldworkMapsView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fieldwork_maps)
-        super.init(toolbar)
+        super.init(toolbar, true)
 
         presenter = initPresenter (FieldworkMapsPresenter(this)) as FieldworkMapsPresenter
 

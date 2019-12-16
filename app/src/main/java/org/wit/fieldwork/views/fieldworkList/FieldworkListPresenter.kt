@@ -32,6 +32,11 @@ class FieldworkListPresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
+    fun doLoadFavourites(){
+        view?.navigateTo(VIEW.FAVOURITE)
+
+    }
+
     fun doLogout(){
         view?.navigateTo(VIEW.LOGIN)
     }
@@ -40,45 +45,3 @@ class FieldworkListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.SETTINGS)
     }
 }
-/*
-import org.jetbrains.anko.intentFor
-import org.wit.fieldwork.models.FieldworkModel
-
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
-import org.wit.fieldwork.views.map.FieldworkMapsView
-import org.wit.fieldwork.activities.SettingsActivity
-import org.wit.fieldwork.main.MainApp
-import org.wit.fieldwork.views.fieldwork.FieldworkView
-
-
-class FieldworkListPresenter(val view: FieldworkListView) {
-
-    var app: MainApp
-
-    init {
-        app = view.application as MainApp
-    }
-
-    fun getFieldworks() = app.fieldworks.findAll()
-
-    fun doAddFieldwork() {
-        view.startActivityForResult<FieldworkView>(0)
-    }
-
-    fun doEditFieldwork(fieldwork: FieldworkModel) {
-        view.startActivityForResult(view.intentFor<FieldworkView>().putExtra("fieldwork_edit", fieldwork), 0)
-    }
-
-    fun doShowFieldworksMap() {
-        view.startActivity<FieldworkMapsView>()
-    }
-
-    fun doLogout(){
-        view.finish()
-    }
-
-    fun doSettings(){
-        view.startActivityForResult<SettingsActivity>(0)
-    }
-}*/

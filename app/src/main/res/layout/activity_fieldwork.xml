@@ -247,6 +247,18 @@
                     android:layout_marginEnd="220dp"
                     android:layout_marginBottom="26dp"
                     android:text="Visited Site"
+                    app:layout_constraintBottom_toTopOf="@+id/checkBox1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/checkBox1"
+                    android:layout_width="147dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginEnd="220dp"
+                    android:layout_marginBottom="26dp"
+                    android:text="Favourite"
                     app:layout_constraintBottom_toTopOf="@+id/btnAdd"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

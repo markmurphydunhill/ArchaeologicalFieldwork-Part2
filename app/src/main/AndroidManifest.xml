@@ -48,6 +48,14 @@
                 android:value=".views.fieldworkList.FieldworkListView" />
         </activity>
 
+        <activity
+            android:name=".views.favouriteList.FavouriteView"
+            android:label="@string/title_favourites"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.fieldworkList.FieldworkListView" />
+        </activity>
 
         <activity android:name=".views.login.LoginView"
             android:label="@string/title_activity_login">

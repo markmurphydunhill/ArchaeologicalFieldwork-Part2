@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_fieldwork.*
 import kotlinx.android.synthetic.main.activity_fieldwork.fieldworkTitle
+import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.android.synthetic.main.card_fieldwork.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -17,12 +19,12 @@ import org.wit.fieldwork.helpers.readImageFromPath
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.views.BaseView
 
-//class FieldworkView : AppCompatActivity(), AnkoLogger {
+
 class FieldworkView : BaseView(), AnkoLogger {
 
     lateinit var presenter: FieldworkPresenter
     var fieldwork = FieldworkModel()
-    //lateinit var map: GoogleMap
+    lateinit var map: GoogleMap
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +38,12 @@ class FieldworkView : BaseView(), AnkoLogger {
         presenter = FieldworkPresenter(this)
 
 
-      /* mapView.onCreate(savedInstanceState);
+       mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
-        }*/
+        }
 
         btnAdd.setOnClickListener {
             info("clicking Add/update")
@@ -71,6 +73,26 @@ class FieldworkView : BaseView(), AnkoLogger {
             presenter.doSelectImage4()
         }
 
+        checkBox.setOnClickListener(View.OnClickListener {
+            if (checkBox.isChecked) {
+                info ("Check Box Checked")
+                fieldwork.visited = true
+            } else {
+                info ("Check Box is not Checked")
+                fieldwork.visited = false
+            }
+        })
+
+       /* checkBox.setOnClickListener(View.OnClickListener {
+            if (checkBox1.isChecked) {
+                info ("Check Box Checked")
+                fieldwork.favourite = true
+            } else {
+                info ("Check Box is not Checked")
+                fieldwork.favourite = false
+            }
+        })*/
+
         placemarkLocation.setOnClickListener { presenter.doSetLocation() }
 
         btnDel.setOnClickListener {
@@ -83,6 +105,8 @@ class FieldworkView : BaseView(), AnkoLogger {
     override fun showFieldwork(fieldwork: FieldworkModel) {
         fieldworkTitle.setText(fieldwork.title)
         fieldworkDesc.setText(fieldwork.description)
+       // checkbox.setChecked.(fieldwork.checkBox)
+        //checkbox1. (fieldwork.checkBox1)
         fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
         fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
         fieldworkImage3.setImageBitmap(readImageFromPath(this, fieldwork.image3))
@@ -153,7 +177,7 @@ class FieldworkView : BaseView(), AnkoLogger {
         }
     }
 
-   /* override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         mapView.onDestroy()
     }
@@ -176,7 +200,7 @@ class FieldworkView : BaseView(), AnkoLogger {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
-    }*/
+    }
 }
 
 

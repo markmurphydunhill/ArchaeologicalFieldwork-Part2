@@ -6,5 +6,6 @@ interface FieldworkStore {
   fun update (fieldwork: FieldworkModel)
   fun delete(fieldwork: FieldworkModel)
   fun findById(id:Long) : FieldworkModel?
+  fun clear()
 
 }

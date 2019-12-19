@@ -1,4 +1,4 @@
-package org.wit.fieldwork.models
+/*package org.wit.fieldwork.models
 
 
 import android.content.Context
@@ -88,4 +88,8 @@ class FieldworkJSONStore : FieldworkStore, AnkoLogger {
         val jsonString = read(context, JSON_FILE)
         fieldworks = Gson().fromJson(jsonString, listType)
     }
-}
+
+    override fun clear() {
+        fieldworks.clear()
+    }
+}*/

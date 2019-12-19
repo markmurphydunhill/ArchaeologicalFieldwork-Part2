@@ -1,4 +1,4 @@
-package org.wit.fieldwork.models
+/*package org.wit.fieldwork.models
 
 
 import android.content.Context
@@ -51,4 +51,4 @@ class UserJSONStore : UserStore, AnkoLogger {
         val jsonString = read(context, JSON_FILE)
         users = Gson().fromJson(jsonString, listType)
     }
-}
+}*/

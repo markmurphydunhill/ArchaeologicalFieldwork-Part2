@@ -9,6 +9,7 @@ import androidx.room.Embedded
 @Parcelize
 @Entity
 data class FieldworkModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
+                          var fbId : String = "",
                           var title: String = "",
                           var description: String = "",
                           var image1: String = "",

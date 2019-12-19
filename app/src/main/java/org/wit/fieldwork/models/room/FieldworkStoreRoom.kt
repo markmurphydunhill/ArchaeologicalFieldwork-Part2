@@ -1,4 +1,4 @@
-package org.wit.fieldwork.models.room
+/*package org.wit.fieldwork.models.room
 
 import android.content.Context
 import androidx.room.Room
@@ -35,4 +35,4 @@ class FieldworkStoreRoom(val context: Context) : FieldworkStore {
     override fun delete(fieldwork: FieldworkModel) {
         dao.deleteFieldwork(fieldwork)
     }
-}
+}*/

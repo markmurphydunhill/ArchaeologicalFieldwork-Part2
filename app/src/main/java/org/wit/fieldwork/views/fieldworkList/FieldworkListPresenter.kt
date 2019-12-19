@@ -1,6 +1,7 @@
 package org.wit.fieldwork.views.fieldworkList
 
 
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.wit.fieldwork.activities.SettingsActivity
@@ -32,7 +33,13 @@ class FieldworkListPresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
-    fun doLogout(){
+    /*fun doLogout(){
+        view?.navigateTo(VIEW.LOGIN)
+    }*/
+
+    fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
+        app.fieldworks.clear()
         view?.navigateTo(VIEW.LOGIN)
     }
 

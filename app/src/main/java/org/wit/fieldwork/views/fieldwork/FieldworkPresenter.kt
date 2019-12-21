@@ -42,13 +42,13 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         } else {
             // fieldwork.lat = defaultLocation.lat
             //fieldwork.lng = defaultLocation.lng
-           /* if (checkLocationPermissions(view)) {
+            if (checkLocationPermissions(view)) {
                 doSetCurrentLocation()
-            }*/
+            }
         }
     }
 
-    /*@SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission")
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
             locationUpdate(Location(it.latitude, it.longitude))
@@ -67,7 +67,7 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     fun doConfigureMap(m: GoogleMap) {
         map = m
         locationUpdate(fieldwork.location)
-    }*/
+    }
 
     fun locationUpdate(location:Location) {
         // fieldwork.lat = lat

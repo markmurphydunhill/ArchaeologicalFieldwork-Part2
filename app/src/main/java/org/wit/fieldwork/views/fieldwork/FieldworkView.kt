@@ -25,7 +25,7 @@ class FieldworkView : BaseView(), AnkoLogger {
 
     lateinit var presenter: FieldworkPresenter
     var fieldwork = FieldworkModel()
-   // lateinit var map: GoogleMap
+    lateinit var map: GoogleMap
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +39,12 @@ class FieldworkView : BaseView(), AnkoLogger {
         presenter = FieldworkPresenter(this)
 
 
-      /*  mapView.onCreate(savedInstanceState);
+        mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
-        }*/
+        }
 
         btnAdd.setOnClickListener {
             info("clicking Add/update")

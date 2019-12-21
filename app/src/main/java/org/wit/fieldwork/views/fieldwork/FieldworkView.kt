@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_fieldwork.*
 import kotlinx.android.synthetic.main.activity_fieldwork.fieldworkTitle
@@ -107,10 +108,14 @@ class FieldworkView : BaseView(), AnkoLogger {
         fieldworkDesc.setText(fieldwork.description)
         // checkbox.setChecked.(fieldwork.checkBox)
         //checkbox1. (fieldwork.checkBox1)
-        fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
-        fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
-        fieldworkImage3.setImageBitmap(readImageFromPath(this, fieldwork.image3))
-        fieldworkImage4.setImageBitmap(readImageFromPath(this, fieldwork.image4))
+       // fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
+       // fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
+       // fieldworkImage3.setImageBitmap(readImageFromPath(this, fieldwork.image3))
+        //fieldworkImage4.setImageBitmap(readImageFromPath(this, fieldwork.image4))
+        Glide.with(this).load(fieldwork.image1).into(fieldworkImage1);
+        Glide.with(this).load(fieldwork.image2).into(fieldworkImage2);
+        Glide.with(this).load(fieldwork.image3).into(fieldworkImage3);
+        Glide.with(this).load(fieldwork.image4).into(fieldworkImage4);
         if (fieldworkImage1 != null) {
             chooseImage1.setText(R.string.update_image1)
         }

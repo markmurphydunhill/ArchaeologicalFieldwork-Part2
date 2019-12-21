@@ -1,17 +1,23 @@
 package org.wit.fieldwork.models.firebase
 
 import android.content.Context
+import android.graphics.Bitmap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.StorageReference
 import org.jetbrains.anko.AnkoLogger
+import org.wit.fieldwork.helpers.readImageFromPath
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.models.FieldworkStore
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 class FieldworkFireStore(val context: Context) : FieldworkStore, AnkoLogger {
 
     val fieldworks = ArrayList<FieldworkModel>()
     lateinit var userId: String
     lateinit var db: DatabaseReference
+    lateinit var st: StorageReference
 
     override fun findAll(): List<FieldworkModel> {
         return fieldworks
@@ -28,6 +34,7 @@ class FieldworkFireStore(val context: Context) : FieldworkStore, AnkoLogger {
             fieldwork.fbId = key
             fieldworks.add(fieldwork)
             db.child("users").child(userId).child("fieldworks").child(key).setValue(fieldwork)
+           // updateImage1(fieldwork)
         }
     }
 
@@ -48,6 +55,9 @@ class FieldworkFireStore(val context: Context) : FieldworkStore, AnkoLogger {
         }
 
         db.child("users").child(userId).child("fieldworks").child(fieldwork.fbId).setValue(fieldwork)
+       /* if ((fieldwork.image1.length) > 0 && (fieldwork.image1[0] != 'h')) {
+            updateImage1(fieldwork)
+        }*/
 
     }
 
@@ -73,5 +83,30 @@ class FieldworkFireStore(val context: Context) : FieldworkStore, AnkoLogger {
         db = FirebaseDatabase.getInstance().reference
         fieldworks.clear()
         db.child("users").child(userId).child("fieldworks").addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    fun updateImage1(fieldwork: FieldworkModel) {
+        if (fieldwork.image1 != "") {
+            val fileName = File(fieldwork.image1)
+            val imageName = fileName.getName()
+
+            var imageRef = st.child(userId + '/' + imageName)
+            val baos = ByteArrayOutputStream()
+            val bitmap = readImageFromPath(context, fieldwork.image1)
+
+            bitmap?.let {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val uploadTask = imageRef.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    println(it.message)
+                }.addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                        fieldwork.image1 = it.toString()
+                        db.child("users").child(userId).child("fieldworks").child(fieldwork.fbId).setValue(fieldwork)
+                    }
+                }
+            }
+        }
     }
 }

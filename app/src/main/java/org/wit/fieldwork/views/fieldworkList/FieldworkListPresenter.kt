@@ -33,6 +33,10 @@ class FieldworkListPresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
+    fun doLoadFavourites(){
+                view?.navigateTo(VIEW.FAVOURITE)
+    }
+
     /*fun doLogout(){
         view?.navigateTo(VIEW.LOGIN)
     }*/

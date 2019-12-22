@@ -43,6 +43,7 @@ class FieldworkListView :  BaseView(), FieldworkListener {
             R.id.item_map -> doAsync{ presenter.doShowFieldworksMap()}
             R.id.item_logout -> presenter.doLogout()
             R.id.item_settings -> presenter.doSettings()
+            R.id.item_favourites -> presenter.doLoadFavourites()
         }
         return super.onOptionsItemSelected(item)
     }

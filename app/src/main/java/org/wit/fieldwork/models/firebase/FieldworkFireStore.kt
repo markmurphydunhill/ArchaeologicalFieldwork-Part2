@@ -52,6 +52,7 @@ class FieldworkFireStore(val context: Context) : FieldworkStore, AnkoLogger {
             //foundFieldwork.lng = fieldwork.lng
             //foundFieldwork.zoom = fieldwork.zoom
             foundFieldwork.visited = fieldwork.visited
+            foundFieldwork.favourite = fieldwork.favourite
         }
 
         db.child("users").child(userId).child("fieldworks").child(fieldwork.fbId).setValue(fieldwork)

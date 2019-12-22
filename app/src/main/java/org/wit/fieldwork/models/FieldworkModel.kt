@@ -20,6 +20,7 @@ data class FieldworkModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                           //var lng: Double = 0.0,
                           //var zoom: Float = 0f,
                           var visited: Boolean = false,
+                          var favourite: Boolean = false,
                           @Embedded var location : Location = Location()): Parcelable
 
 @Parcelize

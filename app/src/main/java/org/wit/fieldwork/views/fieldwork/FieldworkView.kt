@@ -84,7 +84,7 @@ class FieldworkView : BaseView(), AnkoLogger {
             }
         })
 
-        /* checkBox.setOnClickListener(View.OnClickListener {
+         checkBox.setOnClickListener(View.OnClickListener {
              if (checkBox1.isChecked) {
                  info ("Check Box Checked")
                  fieldwork.favourite = true
@@ -92,7 +92,7 @@ class FieldworkView : BaseView(), AnkoLogger {
                  info ("Check Box is not Checked")
                  fieldwork.favourite = false
              }
-         })*/
+         })
 
         placemarkLocation.setOnClickListener { presenter.doSetLocation() }
 
@@ -106,12 +106,9 @@ class FieldworkView : BaseView(), AnkoLogger {
     override fun showFieldwork(fieldwork: FieldworkModel) {
         fieldworkTitle.setText(fieldwork.title)
         fieldworkDesc.setText(fieldwork.description)
-        // checkbox.setChecked.(fieldwork.checkBox)
+
         //checkbox1. (fieldwork.checkBox1)
-       // fieldworkImage1.setImageBitmap(readImageFromPath(this, fieldwork.image1))
-       // fieldworkImage2.setImageBitmap(readImageFromPath(this, fieldwork.image2))
-       // fieldworkImage3.setImageBitmap(readImageFromPath(this, fieldwork.image3))
-        //fieldworkImage4.setImageBitmap(readImageFromPath(this, fieldwork.image4))
+
         Glide.with(this).load(fieldwork.image1).into(fieldworkImage1);
         Glide.with(this).load(fieldwork.image2).into(fieldworkImage2);
         Glide.with(this).load(fieldwork.image3).into(fieldworkImage3);

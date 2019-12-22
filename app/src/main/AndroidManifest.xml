@@ -56,6 +56,13 @@
                 android:value=".views.fieldworkList.FieldworkListView" />
         </activity>
 
+        <activity android:name=".views.FavouriteList.FavouriteView"
+            android:label="@string/title_favourite">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.fieldworkList.FieldworkListView" />
+        </activity>
+
         <activity android:name=".activities.SettingsActivity" />
 
         <activity android:name=".activities.SplashActivity">

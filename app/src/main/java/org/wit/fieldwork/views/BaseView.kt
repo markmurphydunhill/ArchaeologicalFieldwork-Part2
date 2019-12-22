@@ -12,6 +12,7 @@ import org.wit.fieldwork.activities.SettingsActivity
 
 import org.wit.fieldwork.models.FieldworkModel
 import org.wit.fieldwork.models.Location
+import org.wit.fieldwork.views.FavouriteList.FavouriteView
 import org.wit.fieldwork.views.editLocation.EditLocationView
 import org.wit.fieldwork.views.map.FieldworkMapsView
 import org.wit.fieldwork.views.fieldwork.FieldworkView
@@ -25,7 +26,7 @@ val IMAGE3_REQUEST = 4
 val IMAGE4_REQUEST = 5
 
 enum class VIEW {
-    LOCATION, FIELDWORK, MAPS, LIST, SETTINGS, LOGIN
+    LOCATION, FIELDWORK, MAPS, LIST, SETTINGS, LOGIN, FAVOURITE
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -41,6 +42,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.LIST -> intent = Intent(this, FieldworkListView::class.java)
             VIEW.SETTINGS -> intent = Intent(this, SettingsActivity::class.java)
             VIEW.LOGIN -> intent = Intent (this, LoginView::class.java)
+            VIEW.FAVOURITE -> intent = Intent (this, FavouriteView::class.java)
         }
         if (key != "") {
             intent.putExtra(key, value)
@@ -78,6 +80,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
     open fun showFieldwork(fieldwork: FieldworkModel) {}
     open fun showFieldworks(fieldworks: List<FieldworkModel>) {}
+    open fun showFavourites(fieldworks: List<FieldworkModel>){}
 
     open fun showProgress() {}
     open fun hideProgress() {}

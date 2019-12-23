@@ -7,12 +7,14 @@
     tools:context="org.wit.fieldwork.views.fieldwork.FieldworkView">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-16dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -35,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/appBarLayout"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="9dp"
             android:fillViewport="true">
 
 
@@ -48,11 +50,11 @@
 
                 <EditText
                     android:id="@+id/fieldworkTitle"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="45dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="400dp"
+
+                    android:layout_marginTop="24dp"
                     android:autofillHints=""
                     android:hint="@string/hint_fieldworkTitle"
                     android:inputType="text"
@@ -61,18 +63,18 @@
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/chooseImage1"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
 
                 <EditText
                     android:id="@+id/fieldworkDesc"
-                    android:layout_width="0dp"
+                    android:layout_width="300dp"
                     android:layout_height="45dp"
-                    android:layout_marginStart="400dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
                     android:autofillHints=""
                     android:hint="@string/hint_fieldworkDescription"
                     android:inputType="text"
@@ -81,147 +83,139 @@
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/chooseImage2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.54"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintHorizontal_bias="0.484"
+                    app:layout_constraintStart_toEndOf="@+id/fieldworkTitle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layour_editor_absoluteY="186dp" />
 
                 <Button
                     android:id="@+id/chooseImage1"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="250dp"
+                    android:layout_height="36dp"
                     android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="300dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/button_addImage1"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/fieldworkImage1"
-                    app:layout_constraintLeft_toLeftOf="@+id/chooseImage2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <ImageView
-                    android:id="@+id/fieldworkImage1"
-                    android:layout_width="305dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="400dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/chooseImage3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:layout_constraintTop_toBottomOf="@+id/fieldworkTitle" />
 
                 <Button
                     android:id="@+id/chooseImage2"
-                    android:layout_width="305dp"
-                    android:layout_height="50dp"
+                    android:layout_width="250dp"
+                    android:layout_height="36dp"
                     android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/button_addImage2"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/fieldworkImage2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintRight_toRightOf="@+id/chooseImage1"
-                    app:layout_constraintStart_toStartOf="parent" />
 
+
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.556"
+                    app:layout_constraintStart_toEndOf="@+id/chooseImage1"
+                    app:layout_constraintTop_toBottomOf="@+id/fieldworkDesc"
+                    tools:layour_editor_absoluteY="186dp" />
+
+                <ImageView
+                    android:id="@+id/fieldworkImage1"
+                    android:layout_width="300dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chooseImage1"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    tools:layout_editor_absoluteX="24dp"/>
 
                 <ImageView
                     android:id="@+id/fieldworkImage2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="400dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/chooseImage3"
+                    android:layout_width="300dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="60dp"
+
+                    android:layout_marginTop="16dp"
+
+                    android:layout_marginEnd="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:layout_constraintHorizontal_bias="0.472"
+                    app:layout_constraintStart_toEndOf="@+id/fieldworkImage1"
+                    app:layout_constraintTop_toBottomOf="@+id/chooseImage2"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    tools:layour_editor_absoluteY="186dp" />
 
                 <Button
                     android:id="@+id/chooseImage3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="250dp"
+                    android:layout_height="36dp"
                     android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginStart="16dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/button_addImage3"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/fieldworkImage3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <ImageView
-                    android:id="@+id/fieldworkImage3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/chooseImage4"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:layout_constraintTop_toBottomOf="@+id/fieldworkImage1" />
 
                 <Button
                     android:id="@+id/chooseImage4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="250dp"
+                    android:layout_height="36dp"
                     android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="32dp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/button_addImage4"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/fieldworkImage4"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintHorizontal_bias="0.579"
+                    app:layout_constraintStart_toEndOf="@+id/chooseImage3"
+                    app:layout_constraintTop_toBottomOf="@+id/fieldworkImage2"
+                    tools:layour_editor_absoluteY="186dp" />
+
+                <ImageView
+                    android:id="@+id/fieldworkImage3"
+                    android:layout_width="300dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chooseImage3"
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <ImageView
                     android:id="@+id/fieldworkImage4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="35dp"
-                    app:layout_constraintBottom_toTopOf="@+id/placemarkLocation"
+                    android:layout_width="300dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:layout_constraintStart_toEndOf="@+id/fieldworkImage3"
+                    app:layout_constraintTop_toBottomOf="@+id/chooseImage4"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    tools:layour_editor_absoluteY="186dp" />
 
                 <Button
                     android:id="@+id/placemarkLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="34dp"
+                    android:layout_marginStart="16dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
@@ -229,33 +223,70 @@
                     android:text="@string/button_location"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/checkBox"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fieldworkImage3" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="363dp"
+                    android:layout_height="162dp"
+                    android:layout_marginTop="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-
-
-
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/placemarkLocation" />
 
                 <CheckBox
                     android:id="@+id/checkBox"
                     android:layout_width="147dp"
                     android:layout_height="45dp"
-                    android:layout_marginStart="44dp"
-                    android:layout_marginEnd="220dp"
-                    android:layout_marginBottom="26dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
                     android:text="Visited Site"
-                    app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mapView" />
+
+                <CheckBox
+                    android:id="@+id/checkBox1"
+                    android:layout_width="147dp"
+                    android:layout_height="45dp"
+                    android:text="Favourite"
+                    app:layout_constraintStart_toEndOf="@+id/checkBox"
+                    app:layout_constraintTop_toTopOf="@+id/checkBox" />
+
+                <TextView
+                    android:id="@+id/RateFieldwork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Rate this Fieldwork"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
+
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:numStars="5"
+                    android:rating="1.0"
+                    android:stepSize="1.0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/RateFieldwork" />
 
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
@@ -263,18 +294,18 @@
                     android:text="@string/button_addFieldwork"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/btnDel"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
                 <Button
                     android:id="@+id/btnDel"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
@@ -282,9 +313,9 @@
                     android:text="@string/button_delFieldwork"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

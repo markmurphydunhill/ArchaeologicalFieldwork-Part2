@@ -30,15 +30,11 @@ class SettingsActivity : AppCompatActivity(), AnkoLogger {
         //super.init(toolbar, true);
         var totalFieldworks = 0
         var totalVisited = 0
-        //val fieldworkList = app.fieldworks.findAll() as ArrayList<FieldworkModel>
-        val fieldworkList = doAsync { app.fieldworks.findAll() as ArrayList<FieldworkModel>}
-        //val fieldworkList = findAllFieldworks()
+        var totalFavourite = 0
 
+        val fieldworkList = app.fieldworks.findAll()  as ArrayList<FieldworkModel>
 
-        info ("HELLO $fieldworkList " )
-
-
-       /* for (fieldwork in fieldworkList) {
+        for (fieldwork in fieldworkList) {
             totalFieldworks++
 
         }
@@ -47,16 +43,22 @@ class SettingsActivity : AppCompatActivity(), AnkoLogger {
             if (fieldwork.visited == true) {
                 totalVisited++
             }
-        }*/
-        totalFieldworksSoFar.text = ("Total Archaelogical Fieldworks added:  $totalFieldworks")
-        totalVisistedSoFar.text = ("Total Archaelogical Fieldworks visited:  $totalVisited")
+        }
+
+        for (fieldwork in fieldworkList) {
+            if (fieldwork.favourite == true) {
+                totalFavourite++
+            }
+        }
+
+
+        totalFieldworksSoFar.text = ("Total Fieldworks added:  $totalFieldworks")
+        totalVisistedSoFar.text = ("Total Fieldworks visited:  $totalVisited")
+        totalFavouriteSoFar.text = ("Total Favourite Fieldworks:  $totalFavourite")
+
 
          }
-        //info("Total Fieldworks: $totalFieldworks")
-        //info("Total Visited Fieldworks: $totalVisited")
 
-      //  totalFieldworksSoFar.text = ("Total Archaelogical Fieldworks added:  $totalFieldworks")
-       // totalVisistedSoFar.text = ("Total Archaelogical Fieldworks visited:  $totalVisited")
 
     }
 

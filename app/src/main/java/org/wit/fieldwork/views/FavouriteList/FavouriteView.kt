@@ -33,21 +33,7 @@ class FavouriteView :  BaseView(), FavouriteListener {
         recyclerView.adapter = FavouriteAdapter(fieldworks, this)
         recyclerView.adapter?.notifyDataSetChanged()
     }
-     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-         menuInflater.inflate(R.menu.menu_main, menu)
-         return super.onCreateOptionsMenu(menu)
-     }
 
-    /*
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-         when (item?.itemId) {
-             R.id.item_add -> doAsync { presenter.doAddFieldwork()}
-             R.id.item_map -> doAsync{ presenter.doShowFieldworksMap()}
-             R.id.item_logout -> presenter.doLogout()
-             R.id.item_settings -> presenter.doSettings()
-         }
-         return super.onOptionsItemSelected(item)
-     }*/
 
     override fun onFavouriteClick(fieldwork: FieldworkModel) {
         presenter.doEditFieldwork(fieldwork)

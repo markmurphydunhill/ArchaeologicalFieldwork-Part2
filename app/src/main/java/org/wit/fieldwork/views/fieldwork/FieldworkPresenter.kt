@@ -99,10 +99,11 @@ class FieldworkPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     }
 */
 
-
-    fun doAddOrSave(title: String, description: String) {
+    fun doAddOrSave(title: String, description: String){
+    //fun doAddOrSave(title: String, description: String, rating: Float) {
         fieldwork.title = title
         fieldwork.description = description
+        //fieldwork.rating = rating
         doAsync {
             if (edit) {
                 app.fieldworks.update(fieldwork)

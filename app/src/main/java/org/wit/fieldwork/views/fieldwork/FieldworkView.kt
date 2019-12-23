@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.RatingBar
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_fieldwork.*
@@ -38,6 +39,7 @@ class FieldworkView : BaseView(), AnkoLogger {
 
         presenter = FieldworkPresenter(this)
 
+        //val rate = findViewById<View> (R.id.ratingBar) as RatingBar
 
         mapView.onCreate(savedInstanceState);
 
@@ -52,7 +54,7 @@ class FieldworkView : BaseView(), AnkoLogger {
                 toast(R.string.enter_fieldwork_title)
             } else {
 
-                //presenter.doAddOrSave(fieldworkTitle.text.toString(), fieldworkDescription.text.toString())
+                //presenter.doAddOrSave(fieldworkTitle.text.toString(), fieldworkDesc.text.toString(), rate.getRating())
                 presenter.doAddOrSave(fieldworkTitle.text.toString(), fieldworkDesc.text.toString())
 
             }

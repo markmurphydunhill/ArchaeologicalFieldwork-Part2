@@ -16,11 +16,9 @@ data class FieldworkModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                           var image2: String = "",
                           var image3: String ="",
                           var image4: String = "",
-                          //var lat : Double = 0.0,
-                          //var lng: Double = 0.0,
-                          //var zoom: Float = 0f,
                           var visited: Boolean = false,
                           var favourite: Boolean = false,
+                          //var rating: Float,
                           @Embedded var location : Location = Location()): Parcelable
 
 @Parcelize
